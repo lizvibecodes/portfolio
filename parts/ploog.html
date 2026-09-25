@@ -1,0 +1,121 @@
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@500&display=swap" rel="stylesheet">
+<style>
+  .ploog-page{
+    --ink:#0F0F11; --purple:#7C5CFC; --red:#FF3B30; --orange:#FF7A45; --paper:#F3F1EC;
+    background:var(--ink);
+  }
+  .ploog-page *{box-sizing:border-box;}
+  .ploog-page .cover{
+    position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:
+      radial-gradient(120% 90% at 72% 62%, rgba(255,90,50,.10), transparent 60%),
+      radial-gradient(80% 60% at 20% 15%, rgba(124,92,252,.10), transparent 60%),
+      var(--ink);
+  }
+  .ploog-page .grain{position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay; pointer-events:none;}
+  .ploog-page #ploog-cover-bars{position:absolute; left:0; right:0; bottom:0; height:62%; display:flex; align-items:flex-end;}
+  .ploog-page .bar{flex:1 1 auto; min-width:1px;}
+  .ploog-page .cluster{position:absolute; right:16%; bottom:30%; transform:translate(50%,50%);}
+  .ploog-page .glow{filter:drop-shadow(0 0 40px rgba(255,90,50,.55));}
+  .ploog-page .brand{
+    position:absolute; left:50%; top:38%; transform:translate(-50%,-50%); text-align:center; width:100%;
+  }
+  .ploog-page .wordmark{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--paper);
+    font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; margin:0;
+  }
+  .ploog-page .tagline{
+    font-family:'Inter',sans-serif; font-weight:500; color:var(--paper); opacity:.55;
+    font-size:clamp(11px,1.1vw,15px); letter-spacing:0.32em; margin-top:14px; text-transform:uppercase;
+  }
+  .ploog-page .corner{
+    position:absolute; top:5%; left:5%; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em;
+    color:var(--paper); opacity:.4; text-transform:uppercase;
+  }
+  .ploog-page .corner-r{
+    position:absolute; top:5%; right:5%; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.14em;
+    color:var(--paper); opacity:.4;
+  }
+  .ploog-page .logo-slot{
+    border:1.5px dashed rgba(243,241,236,.4); border-radius:6px; background:rgba(243,241,236,.04);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:'Inter',sans-serif; color:var(--paper); opacity:.6; letter-spacing:.08em;
+    text-transform:uppercase; resize:both; overflow:auto; cursor:text; min-width:40px; min-height:28px;
+  }
+  .ploog-page .logo-slot:focus{outline:1.5px dashed var(--purple); opacity:1;}
+  .ploog-page .logo-slot.mark{width:180px; height:100px; font-size:12px;}
+  .ploog-page .logo-slot.wordmark{width:340px; height:92px; font-size:13px; margin:0 auto;}
+  .ploog-page .logo-slot.corner{width:90px; height:26px; font-size:10px;}
+
+  .ploog-page .info{max-width:900px; margin:0 auto; padding:64px 32px 80px; font-family:'Inter',sans-serif;}
+  .ploog-page .info h2{font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--paper); font-size:26px; margin:0 0 16px;}
+  .ploog-page .info p.desc{color:var(--paper); opacity:.65; line-height:1.7; font-size:16px; max-width:640px; margin:0 0 48px;}
+  .ploog-page .palette{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:2px; background:rgba(243,241,236,.12); border:1px solid rgba(243,241,236,.12);}
+  .ploog-page .swatch{background:var(--ink); padding:22px 18px;}
+  .ploog-page .swatch .chip{width:100%; height:52px; border-radius:4px; margin-bottom:14px;}
+  .ploog-page .swatch .name{font-family:'Space Grotesk',sans-serif; color:var(--paper); font-size:14px;}
+  .ploog-page .swatch .hex{color:var(--paper); opacity:.5; font-size:12px; margin-top:3px;}
+</style>
+
+<div class="ploog-page">
+  <div class="cover" id="ploog-cover">
+    <svg class="grain" width="100%" height="100%">
+      <filter id="ploog-noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#ploog-noise)" opacity="0.06"/>
+    </svg>
+
+    <div id="ploog-cover-bars"></div>
+
+    <div class="cluster logo-slot mark" contenteditable="true" spellcheck="false">Logo mark</div>
+
+    <div class="brand">
+      <div class="logo-slot wordmark" contenteditable="true" spellcheck="false">Wordmark</div>
+      <p class="tagline">Unlock Collective Intelligence</p>
+    </div>
+
+    <div class="logo-slot corner" style="position:absolute; top:5%; left:5%;" contenteditable="true" spellcheck="false">Logo</div>
+    <div class="corner-r">No. 001</div>
+  </div>
+
+  <div class="info">
+    <h2>The concept</h2>
+    <p class="desc">The mark reads left to right as a story: a loose, human waveform — one person's raw idea — resolves into a structured cluster of connected nodes. Purple is the individual signal. The red-to-orange gradient is what happens when that signal joins the network: it gets shape, connection, and attribution. This cover carries the same arc — a waveform rising from the individual (purple) into the network (ember) — so the same logic that drives the logo drives every asset in the system.</p>
+
+    <h2>Color palette</h2>
+    <div class="palette">
+      <div class="swatch"><div class="chip" style="background:#7C5CFC;"></div><div class="name">Signal Purple</div><div class="hex">#7C5CFC — the individual</div></div>
+      <div class="swatch"><div class="chip" style="background:#FF3B30;"></div><div class="name">Ember Red</div><div class="hex">#FF3B30 — the network, node</div></div>
+      <div class="swatch"><div class="chip" style="background:#FF7A45;"></div><div class="name">Ember Orange</div><div class="hex">#FF7A45 — the network, edge</div></div>
+      <div class="swatch"><div class="chip" style="background:#F3F1EC;"></div><div class="name">Paper</div><div class="hex">#F3F1EC — primary text</div></div>
+      <div class="swatch"><div class="chip" style="background:#BFC0C0;"></div><div class="name">Mist Grey</div><div class="hex">#BFC0C0</div></div>
+      <div class="swatch"><div class="chip" style="background:#1F2041;"></div><div class="name">Deep Indigo</div><div class="hex">#1F2041</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.initPloogCover = function(){
+    const bars = document.getElementById('ploog-cover-bars');
+    if (!bars || bars.dataset.built) return;
+    bars.dataset.built = '1';
+    const N = 160;
+    const purple = [124,92,252], red = [255,59,48], orange = [255,122,69];
+    function lerp(a,b,t){return a+(b-a)*t;}
+    function mix(c1,c2,t){return `rgb(${lerp(c1[0],c2[0],t)|0},${lerp(c1[1],c2[1],t)|0},${lerp(c1[2],c2[2],t)|0})`;}
+    for(let i=0;i<N;i++){
+      const t = i/(N-1);
+      const wave = Math.sin(t*Math.PI*2.4 + 0.6) * 0.5 + 0.5;
+      const rise = Math.pow(t,1.6);
+      const h = 6 + wave*22 + rise*62;
+      const color = t < 0.55 ? mix(purple, red, t/0.55) : mix(red, orange, (t-0.55)/0.45);
+      const bar = document.createElement('div');
+      bar.className='bar';
+      bar.style.height = h + '%';
+      bar.style.background = color;
+      bar.style.opacity = 0.16 + rise*0.6;
+      bar.style.margin = '0 1px';
+      bars.appendChild(bar);
+    }
+  };
+  // Auto-run in case this <script> actually executes on insertion.
+  window.initPloogCover();
+</script>

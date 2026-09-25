@@ -1,188 +1,21 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Lizelda von Francois — Portfolio</title>
-<script src="./vendor/react.js"></script>
-<script src="./vendor/react-dom.js"></script>
-<script src="./support.js"></script>
-<link rel="icon" href="images/favicon.ico">
-</head>
+<div id="head"></div>
 <body>
 <x-dc>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&amp;family=Work+Sans:wght@400;500;600&amp;display=swap">
-<style>
-  body{margin:0;font-family:'Work Sans',sans-serif;background:#FBF7EC;color:#161611;}
-  a{color:inherit;text-decoration:none;}
-  .eyebrow{font-family:'Work Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;}
-  .card-link{transition:opacity .15s ease;}
-  .card-link:hover{opacity:0.86;}
-  .tool-icon{
-    width:40px;height:40px;border-radius:8px;
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-  }
-  .tool-icon img{
-    width:40px;height:40px;
-    display:block;
-  }
 
-</style>
+<div id="style"></div>
+
 <div style="width: 100%; min-height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; font-family: 'Work Sans', sans-serif;">
-
-  <!-- Top bar -->
-  <div style="display: flex; align-items: center; justify-content: space-between; padding: 22px 64px;">
-    <div class="eyebrow" style="color:#8A8676;">Portfolio 2026</div>
-    <a href="mailto:lizelda@lvf.design" class="eyebrow" style="background:#2E8F47; color:#FBF7EC; padding:12px 22px; border-radius:2px;">Hire me</a>
-  </div>
-
-  <!-- Name / hero -->
-  <div style="padding: 8px 64px 28px;">
-    <div style="display: flex; align-items: flex-end; gap: 6px;">
-      <h1 style="margin:0; font-family:'Fraunces',serif; font-weight:600; font-size:64px; line-height:0.98; letter-spacing:-0.01em;">Lizelda von Francois</h1>
-      <div style="width:14px; height:14px; border-radius:50%; background:#2E8F47; flex-shrink:0; margin-bottom:10px;"></div>
-    </div>
-    <div class="eyebrow" style="color:#3C6B2A; margin-top:10px;">Creative Partner for Growing Businesses</div>
-  </div>
-
-  <!-- Black role bar -->
-  <div style="background:#16150F; color:#FBF7EC; display:flex; align-items:center; justify-content:space-between; padding: 30px 64px; gap: 24px; flex-wrap: wrap;">
-	<div style="display:flex; gap:12px; flex-wrap:wrap;">
-	  <div class="tool-icon" style="background:#001E36;">
-		<img src="images/ps.svg" alt="Photoshop">
-	  </div>
-	  <div class="tool-icon" style="background:#330000;">
-		<img src="images/ai.svg" alt="Illustrator">
-	  </div>
-	  <div class="tool-icon" style="background:#49021F;">
-		<img src="images/id.svg" alt="InDesign">
-	  </div>
-	  <div class="tool-icon" style="background:#2C2C2C;">
-		<img src="images/fi.svg" alt="Figma">
-	  </div>
-	  <div class="tool-icon" style="background:#00C4CC;">
-		<img src="images/ca.svg" alt="Canva">
-	  </div>
-	</div>	
-    <div style="text-align:right; flex-shrink:0;">
-      <div class="eyebrow" style="color:#9A9787;">Available</div>
-      <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:600;">Remote</div>
-      <div style="display:flex; gap:6px; justify-content:flex-end; margin-top:10px;">
-        <div style="width:16px; height:16px; background:#2E8F47;"></div>
-        <div style="width:16px; height:16px; background:#FBF7EC;"></div>
-        <div style="width:16px; height:16px; background:#F0C23E;"></div>
-        <div style="width:16px; height:16px; background:#E08AA0;"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Category strip -->
-  <div style="display:flex; flex-wrap: wrap;">
-    <div style="flex:1 1 190px; background:#E9EFDD; color:#3C6B2A; padding:20px 24px;" class="eyebrow">Brand identity</div>
-    <div style="flex:1 1 190px; background:#F0C23E; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Art direction</div>
-    <div style="flex:1 1 190px; background:#E08AA0; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Social media</div>
-    <div style="flex:1 1 190px; background:#1982c4; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Packaging</div>
-    <div style="flex:1 1 190px; background:#2E8F47; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Print</div>
-    <div style="flex:1 1 190px; background:#6B5E9E; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Digital</div>
-  </div>
-
-  <!-- Intro strip -->
-  <div style="padding:56px 64px;">
-    <p style="max-width:460px; margin:0; font-size:19px; line-height:1.55;">Ten years of building identities that hold up outside the deck — from grocery-shelf packaging to gallery posters. Based remote, working with studios and founders who want the work to feel considered, not templated.</p>
-  </div>
-
-  <!-- Project grid -->
-  <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:2px; background:#16150F;">
-    <a href="#" class="card-link" style="display:block; background:#E9EFDD;">
-      <div style="height:220px; background:#3C6B2A;"></div>
-      <div style="padding:18px 22px 24px;">
-        <div class="eyebrow" style="color:#3C6B2A;">Brand identity</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-          <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:600;">Verdure</div>
-          <span style="font-size:20px;">→</span>
-        </div>
-      </div>
-    </a>
-    <a href="#" class="card-link" style="display:block; background:#F6E7C4;">
-      <div style="height:220px; background:#F0C23E;"></div>
-      <div style="padding:18px 22px 24px;">
-        <div class="eyebrow" style="color:#8A6A10;">Packaging</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-          <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:600;">Soil &amp; Root</div>
-          <span style="font-size:20px;">→</span>
-        </div>
-      </div>
-    </a>
-    <a href="#" class="card-link" style="display:block; background:#F3D7E0;">
-      <div style="height:220px; background:#E08AA0;"></div>
-      <div style="padding:18px 22px 24px;">
-        <div class="eyebrow" style="color:#B5506C;">Social media</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-          <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:600;">Field Notes</div>
-          <span style="font-size:20px;">→</span>
-        </div>
-      </div>
-    </a>
-    <a href="#" class="card-link" style="display:block; background:#DEDCD5;">
-      <div style="height:220px; background:#3C3B36;"></div>
-      <div style="padding:18px 22px 24px;">
-        <div class="eyebrow" style="color:#57554D;">Poster series</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-          <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:600;">Silence</div>
-          <span style="font-size:20px;">→</span>
-        </div>
-      </div>
-    </a>
-  </div>
-
-  <!-- CTA -->
-  <div style="position:relative; background:#2E8F47; color:#FBF7EC; padding:88px 64px 64px; overflow:hidden;">
-    <div style="position:absolute; top:-40px; right:40px; font-family:'Fraunces',serif; font-weight:600; font-size:220px; color:rgba(255,255,255,0.08); line-height:1; pointer-events:none;">WORK</div>
-    <div style="position:relative;">
-      <div class="eyebrow" style="color:#CDE9D3; margin-bottom:14px;">Available for projects</div>
-      <h3 style="margin:0 0 40px; font-family:'Fraunces',serif; font-weight:600; font-size:52px; line-height:1.05; max-width:620px;">Let's make something unforgettable.</h3>
-
-      <div style="max-width:560px; display:flex; flex-direction:column; gap:18px;">
-        <div style="display:flex; gap:18px; flex-wrap:wrap;">
-          <div style="flex:1 1 220px; display:flex; flex-direction:column; gap:6px;">
-            <label for="contact-name" class="eyebrow" style="color:#CDE9D3;">Name</label>
-            <input id="contact-name" name="name" type="text" placeholder="Your name" style="font-family:'Work Sans',sans-serif; font-size:15px; padding:12px 14px; border:none; border-radius:2px; background:#FBF7EC; color:#161611;">
-          </div>
-          <div style="flex:1 1 220px; display:flex; flex-direction:column; gap:6px;">
-            <label for="contact-email" class="eyebrow" style="color:#CDE9D3;">Email</label>
-            <input id="contact-email" name="email" type="email" placeholder="you@studio.com" style="font-family:'Work Sans',sans-serif; font-size:15px; padding:12px 14px; border:none; border-radius:2px; background:#FBF7EC; color:#161611;">
-          </div>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:6px;">
-          <label for="contact-message" class="eyebrow" style="color:#CDE9D3;">Message</label>
-          <textarea id="contact-message" name="message" rows="4" placeholder="Tell me about the project" style="font-family:'Work Sans',sans-serif; font-size:15px; padding:12px 14px; border:none; border-radius:2px; background:#FBF7EC; color:#161611; resize:vertical;"></textarea>
-        </div>
-        <button type="submit" style="align-self:flex-start; font-family:'Work Sans',sans-serif; font-weight:600; font-size:14px; background:#16150F; color:#FBF7EC; padding:14px 28px; border:none; border-radius:2px; cursor:pointer;">Send message</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <div style="background:#16150F; color:#9A9787; display:flex; justify-content:space-between; align-items:center; padding:20px 64px; flex-wrap:wrap; gap:12px;">
-    <div class="eyebrow">Lizelda von Francois — Graphic designer</div>
-    <div style="display:flex; gap:5px;">
-      <div style="width:14px; height:14px; background:#2E8F47;"></div>
-      <div style="width:14px; height:14px; background:#FBF7EC;"></div>
-      <div style="width:14px; height:14px; background:#F0C23E;"></div>
-      <div style="width:14px; height:14px; background:#E08AA0;"></div>
-      <div style="width:14px; height:14px; background:#3C3B36;"></div>
-    </div>
-    <div class="eyebrow">© 2026</div>
-  </div>
-
+  <div id="top_bar"></div>
+  <div id="hero"></div>
+  <div id="role_bar"></div>	
+  <div id="category_strip"></div>
+  <div id="home"></div>
+  <div id="footer"></div>
 </div>
+
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>
-class Component extends DCLogic {
-  renderVals() {
-    return {};
-  }
-}
-</script>
+<script src="loader/components.js"></script>
 </body>
 </html>
