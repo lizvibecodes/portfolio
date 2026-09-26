@@ -8,7 +8,7 @@
   }
   .ploog-page *{box-sizing:border-box;}
   .ploog-page .cover{
-    position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:
+    position:relative; width:100%; aspect-ratio:21/6; overflow:hidden; background:
       radial-gradient(120% 90% at 72% 62%, rgba(255,90,50,.10), transparent 60%),
       radial-gradient(80% 60% at 20% 15%, rgba(124,92,252,.10), transparent 60%),
       var(--ink);
@@ -19,7 +19,7 @@
   .ploog-page .cluster{position:absolute;}
   .ploog-page .glow{filter:drop-shadow(0 0 40px rgba(255,90,50,.55));}
   .ploog-page .brand{
-    position:absolute; left:50%; top:38%; transform:translate(-50%,-50%); text-align:center; width:100%;
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; width:100%;
   }
   .ploog-page .wordmark{
     font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--paper);
@@ -52,19 +52,22 @@
     font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; text-transform:uppercase;
   }
 
-  /* Logo row, sits under the wordmark/tagline */
+  /* Logo section — its own block below the cover, full-width stacked logos */
+  .ploog-page .logo-section{
+    padding:clamp(40px,6vw,72px) 32px; background:var(--ink);
+  }
   .ploog-page .logo-row{
-    display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
-    gap:clamp(20px,3vw,48px); margin-top:clamp(20px,3vw,32px);
+    display:flex; flex-direction:column; align-items:stretch; justify-content:center;
+    width:100%; max-width:640px; margin:0 auto; gap:clamp(32px,5vw,56px);
   }
   .ploog-page .logo-thumb{
-    height:clamp(72px,11vw,150px); display:flex; align-items:center;
+    width:100%; display:flex; align-items:center; justify-content:center;
     cursor:zoom-in; pointer-events:auto; transition:opacity .15s ease;
     text-decoration:none; color:inherit;
   }
   .ploog-page .logo-thumb:hover{opacity:.8;}
   .ploog-page .logo-thumb img{
-    height:100%; width:auto; max-width:360px; object-fit:contain;
+    width:100%; height:auto; max-width:100%; object-fit:contain;
     display:block; border:0; outline:0; user-select:none; -webkit-user-drag:none;
   }
 
@@ -111,14 +114,17 @@
     <div class="brand">
       <div class="logo-slot wordmark">PLOOG</div>
       <p class="tagline">Unlock Collective Intelligence</p>
-      <div class="logo-row" id="ploog-logo-row">
-        <a class="logo-thumb" href="#ploog-lb-1"><img alt="ploog logo" src="images/ploog_logo_01.png" draggable="false"/></a>
-        <a class="logo-thumb" href="#ploog-lb-2"><img alt="ploog logo" src="images/ploog_logo_02.png" draggable="false"/></a>
-        <a class="logo-thumb" href="#ploog-lb-3"><img alt="ploog logo" src="images/ploog_logo_03.jpg" draggable="false"/></a>
-      </div>
     </div>
 
     <div class="corner-r">No. 001</div>
+  </div>
+
+  <div class="logo-section">
+    <div class="logo-row" id="ploog-logo-row">
+      <a class="logo-thumb" href="#ploog-lb-1"><img alt="ploog logo" src="images/ploog_logo_01.png" draggable="false"/></a>
+      <a class="logo-thumb" href="#ploog-lb-2"><img alt="ploog logo" src="images/ploog_logo_02.png" draggable="false"/></a>
+      <a class="logo-thumb" href="#ploog-lb-3"><img alt="ploog logo" src="images/ploog_logo_03.jpg" draggable="false"/></a>
+    </div>
   </div>
 
   <div class="lightbox" id="ploog-lb-1">
