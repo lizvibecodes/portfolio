@@ -1,4 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@500&display=swap" rel="stylesheet">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 <style>
   .ploog-page{
     --ink:#0F0F11; --purple:#7C5CFC; --red:#FF3B30; --orange:#FF7A45; --paper:#F3F1EC;
@@ -53,36 +55,38 @@
   /* Logo row, sits under the wordmark/tagline */
   .ploog-page .logo-row{
     display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
-    gap:clamp(20px,3vw,160px); margin-top:clamp(20px,3vw,32px);
+    gap:clamp(20px,3vw,48px); margin-top:clamp(20px,3vw,32px);
   }
   .ploog-page .logo-thumb{
-    height:clamp(160px,5vw,64px); display:flex; align-items:center;
+    height:clamp(72px,11vw,150px); display:flex; align-items:center;
     cursor:zoom-in; pointer-events:auto; transition:opacity .15s ease;
+    text-decoration:none; color:inherit;
   }
   .ploog-page .logo-thumb:hover{opacity:.8;}
   .ploog-page .logo-thumb img{
-    height:100%; width:auto; max-width:220px; object-fit:contain;
+    height:100%; width:auto; max-width:360px; object-fit:contain;
     display:block; border:0; outline:0; user-select:none; -webkit-user-drag:none;
   }
 
-  /* Lightbox */
+  /* Lightbox — pure CSS, opens via :target so it works with no JS */
   .ploog-page .lightbox{
     position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center;
-    background:rgba(15,15,17,.8); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
-    padding:5vw; cursor:zoom-out; opacity:0; transition:opacity .2s ease;
+    padding:5vw;
   }
-  .ploog-page .lightbox.open{display:flex;}
-  .ploog-page .lightbox.show{opacity:1;}
+  .ploog-page .lightbox:target{display:flex;}
+  .ploog-page .lightbox-backdrop{
+    position:absolute; inset:0; cursor:zoom-out;
+    background:rgba(15,15,17,.8); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  }
   .ploog-page .lightbox img{
-    max-width:90vw; max-height:90vh; width:auto; height:auto; object-fit:contain;
-    box-shadow:0 30px 80px rgba(0,0,0,.55); border-radius:6px; cursor:default;
-    user-select:none; -webkit-user-drag:none;
+    position:relative; max-width:90vw; max-height:90vh; width:auto; height:auto; object-fit:contain;
+    box-shadow:0 30px 80px rgba(0,0,0,.55); border-radius:6px; pointer-events:none;
   }
   .ploog-page .lightbox-close{
     position:absolute; top:24px; right:28px; width:40px; height:40px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;
     background:rgba(243,241,236,.08); color:var(--paper); font-family:'Inter',sans-serif;
-    font-size:20px; line-height:1; border:1px solid rgba(243,241,236,.16);
+    font-size:20px; line-height:1; border:1px solid rgba(243,241,236,.16); text-decoration:none;
   }
 
   .ploog-page .info{max-width:900px; margin:0 auto; padding:64px 32px 80px; font-family:'Inter',sans-serif;}
@@ -108,18 +112,29 @@
       <div class="logo-slot wordmark">PLOOG</div>
       <p class="tagline">Unlock Collective Intelligence</p>
       <div class="logo-row" id="ploog-logo-row">
-        <div class="logo-thumb"><img alt="ploog logo" src="images/ploog_logo_01.png" draggable="false"/></div>
-        <div class="logo-thumb"><img alt="ploog logo" src="images/ploog_logo_02.png" draggable="false"/></div>
-		<div class="logo-thumb"><img alt="ploog logo" src="images/ploog_logo_03.jpg" draggable="false"/></div>
+        <a class="logo-thumb" href="#ploog-lb-1"><img alt="ploog logo" src="images/ploog_logo_01.png" draggable="false"/></a>
+        <a class="logo-thumb" href="#ploog-lb-2"><img alt="ploog logo" src="images/ploog_logo_02.png" draggable="false"/></a>
+        <a class="logo-thumb" href="#ploog-lb-3"><img alt="ploog logo" src="images/ploog_logo_03.jpg" draggable="false"/></a>
       </div>
     </div>
 
     <div class="corner-r">No. 001</div>
   </div>
 
-  <div class="lightbox" id="ploog-lightbox">
-    <div class="lightbox-close" id="ploog-lightbox-close">&times;</div>
-    <img id="ploog-lightbox-img" src="" alt="ploog logo full size"/>
+  <div class="lightbox" id="ploog-lb-1">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/ploog_logo_01.png" alt="ploog logo full size"/>
+  </div>
+  <div class="lightbox" id="ploog-lb-2">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/ploog_logo_02.png" alt="ploog logo full size"/>
+  </div>
+  <div class="lightbox" id="ploog-lb-3">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/ploog_logo_03.jpg" alt="ploog logo full size"/>
   </div>
 
   <div class="info">
@@ -162,37 +177,6 @@
       bars.appendChild(bar);
     }
   };
-  window.initPloogLightbox = function(){
-    const row = document.getElementById('ploog-logo-row');
-    const box = document.getElementById('ploog-lightbox');
-    const img = document.getElementById('ploog-lightbox-img');
-    const closeBtn = document.getElementById('ploog-lightbox-close');
-    if (!row || !box || !img || box.dataset.built) return;
-    box.dataset.built = '1';
-
-    function openBox(src, alt){
-      img.src = src;
-      img.alt = alt || 'ploog logo full size';
-      box.classList.add('open');
-      requestAnimationFrame(()=> box.classList.add('show'));
-    }
-    function closeBox(){
-      box.classList.remove('show');
-      setTimeout(()=>{ box.classList.remove('open'); img.src=''; }, 200);
-    }
-
-    row.querySelectorAll('.logo-thumb').forEach(function(thumb){
-      thumb.addEventListener('click', function(){
-        const thumbImg = thumb.querySelector('img');
-        openBox(thumbImg.getAttribute('src'), thumbImg.getAttribute('alt'));
-      });
-    });
-    closeBtn.addEventListener('click', closeBox);
-    box.addEventListener('click', function(e){ if (e.target === box) closeBox(); });
-    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeBox(); });
-  };
-
   // Auto-run in case this <script> actually executes on insertion.
   window.initPloogCover();
-  window.initPloogLightbox();
 </script>
