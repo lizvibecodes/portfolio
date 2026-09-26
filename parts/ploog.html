@@ -14,7 +14,7 @@
   .ploog-page .grain{position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay; pointer-events:none;}
   .ploog-page #ploog-cover-bars{position:absolute; left:0; right:0; bottom:0; height:62%; display:flex; align-items:flex-end;}
   .ploog-page .bar{flex:1 1 auto; min-width:1px;}
-  .ploog-page .cluster{position:absolute; right:16%; bottom:30%; transform:translate(50%,50%);}
+  .ploog-page .cluster{position:absolute;}
   .ploog-page .glow{filter:drop-shadow(0 0 40px rgba(255,90,50,.55));}
   .ploog-page .brand{
     position:absolute; left:50%; top:38%; transform:translate(-50%,-50%); text-align:center; width:100%;
@@ -36,15 +36,54 @@
     color:var(--paper); opacity:.4;
   }
   .ploog-page .logo-slot{
-    border:1.5px dashed rgba(243,241,236,.4); border-radius:6px; background:rgba(243,241,236,.04);
-    display:flex; align-items:center; justify-content:center; text-align:center;
-    font-family:'Inter',sans-serif; color:var(--paper); opacity:.6; letter-spacing:.08em;
-    text-transform:uppercase; resize:both; overflow:auto; cursor:text; min-width:40px; min-height:28px;
+    position:absolute; display:flex; align-items:center; justify-content:center;
+    border:0; background:none; padding:0; margin:0; outline:0;
+    resize:none; overflow:visible; cursor:default; user-select:none; pointer-events:none;
   }
-  .ploog-page .logo-slot:focus{outline:1.5px dashed var(--purple); opacity:1;}
-  .ploog-page .logo-slot.mark{width:180px; height:100px; font-size:12px;}
-  .ploog-page .logo-slot.wordmark{width:340px; height:92px; font-size:13px; margin:0 auto;}
-  .ploog-page .logo-slot.corner{width:90px; height:26px; font-size:10px;}
+  .ploog-page .logo-slot img{
+    display:block; width:auto; height:auto; max-width:100%; max-height:100%;
+    border:0; outline:0; user-select:none; -webkit-user-drag:none;
+  }
+  .ploog-page .logo-slot.wordmark{
+    position:static; width:auto; height:auto; margin:0 auto; color:#7C5CFC;
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; text-transform:uppercase;
+  }
+
+  /* Logo row, sits under the wordmark/tagline */
+  .ploog-page .logo-row{
+    display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+    gap:clamp(20px,3vw,40px); margin-top:clamp(20px,3vw,32px);
+  }
+  .ploog-page .logo-thumb{
+    height:clamp(40px,5vw,64px); display:flex; align-items:center;
+    cursor:zoom-in; pointer-events:auto; transition:opacity .15s ease;
+  }
+  .ploog-page .logo-thumb:hover{opacity:.8;}
+  .ploog-page .logo-thumb img{
+    height:100%; width:auto; max-width:220px; object-fit:contain;
+    display:block; border:0; outline:0; user-select:none; -webkit-user-drag:none;
+  }
+
+  /* Lightbox */
+  .ploog-page .lightbox{
+    position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center;
+    background:rgba(15,15,17,.8); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+    padding:5vw; cursor:zoom-out; opacity:0; transition:opacity .2s ease;
+  }
+  .ploog-page .lightbox.open{display:flex;}
+  .ploog-page .lightbox.show{opacity:1;}
+  .ploog-page .lightbox img{
+    max-width:90vw; max-height:90vh; width:auto; height:auto; object-fit:contain;
+    box-shadow:0 30px 80px rgba(0,0,0,.55); border-radius:6px; cursor:default;
+    user-select:none; -webkit-user-drag:none;
+  }
+  .ploog-page .lightbox-close{
+    position:absolute; top:24px; right:28px; width:40px; height:40px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    background:rgba(243,241,236,.08); color:var(--paper); font-family:'Inter',sans-serif;
+    font-size:20px; line-height:1; border:1px solid rgba(243,241,236,.16);
+  }
 
   .ploog-page .info{max-width:900px; margin:0 auto; padding:64px 32px 80px; font-family:'Inter',sans-serif;}
   .ploog-page .info h2{font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--paper); font-size:26px; margin:0 0 16px;}
@@ -65,15 +104,21 @@
 
     <div id="ploog-cover-bars"></div>
 
-    <div class="cluster logo-slot mark" contenteditable="true" spellcheck="false"><img alt="ploog logo" src="images/ploog_logo_01.png"/></div>
-
     <div class="brand">
-      <div class="logo-slot wordmark" contenteditable="true" spellcheck="false">Wordmark</div>
+      <div class="logo-slot wordmark">PLOOG</div>
       <p class="tagline">Unlock Collective Intelligence</p>
+      <div class="logo-row" id="ploog-logo-row">
+        <div class="logo-thumb"><img alt="ploog logo" src="images/ploog_logo_01.png" draggable="false"/></div>
+        <div class="logo-thumb"><img alt="ploog logo" src="images/ploog_logo_02.png" draggable="false"/></div>
+      </div>
     </div>
 
-    <div class="logo-slot corner" style="position:absolute; top:5%; left:5%;" contenteditable="true" spellcheck="false">Logo</div>
     <div class="corner-r">No. 001</div>
+  </div>
+
+  <div class="lightbox" id="ploog-lightbox">
+    <div class="lightbox-close" id="ploog-lightbox-close">&times;</div>
+    <img id="ploog-lightbox-img" src="" alt="ploog logo full size"/>
   </div>
 
   <div class="info">
@@ -116,6 +161,37 @@
       bars.appendChild(bar);
     }
   };
+  window.initPloogLightbox = function(){
+    const row = document.getElementById('ploog-logo-row');
+    const box = document.getElementById('ploog-lightbox');
+    const img = document.getElementById('ploog-lightbox-img');
+    const closeBtn = document.getElementById('ploog-lightbox-close');
+    if (!row || !box || !img || box.dataset.built) return;
+    box.dataset.built = '1';
+
+    function openBox(src, alt){
+      img.src = src;
+      img.alt = alt || 'ploog logo full size';
+      box.classList.add('open');
+      requestAnimationFrame(()=> box.classList.add('show'));
+    }
+    function closeBox(){
+      box.classList.remove('show');
+      setTimeout(()=>{ box.classList.remove('open'); img.src=''; }, 200);
+    }
+
+    row.querySelectorAll('.logo-thumb').forEach(function(thumb){
+      thumb.addEventListener('click', function(){
+        const thumbImg = thumb.querySelector('img');
+        openBox(thumbImg.getAttribute('src'), thumbImg.getAttribute('alt'));
+      });
+    });
+    closeBtn.addEventListener('click', closeBox);
+    box.addEventListener('click', function(e){ if (e.target === box) closeBox(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeBox(); });
+  };
+
   // Auto-run in case this <script> actually executes on insertion.
   window.initPloogCover();
+  window.initPloogLightbox();
 </script>
