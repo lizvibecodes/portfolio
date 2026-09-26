@@ -21,6 +21,5 @@ loadComponent("role_bar", "parts/role_bar.html");
 loadComponent("style", "parts/style.html");
 loadComponent("top_bar", "parts/top_bar.html");
 
-
 loadComponent("home", "parts/home.html");
 loadComponent("ploog", "parts/ploog.html");
