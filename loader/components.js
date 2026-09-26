@@ -1,15 +1,22 @@
 async function loadComponent(elementId, file) {
-    const element = document.getElementById(elementId);
-
-    if (!element) return;
-
     const response = await fetch(file);
 
     if (!response.ok) {
         throw new Error(`Could not load ${file}`);
     }
 
-    element.innerHTML = await response.text();
+    const html = await response.text();
+
+    if (elementId === "head") {
+        document.head.innerHTML = html;
+        return;
+    }
+
+    const element = document.getElementById(elementId);
+
+    if (!element) return;
+
+    element.innerHTML = html;
 }
 
 loadComponent("bottom_scripts", "parts/bottom_scripts.html");
