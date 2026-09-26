@@ -55,13 +55,16 @@
     padding:clamp(40px,6vw,72px) 32px; background:var(--ink);
   }
   .ploog-page .logo-row{
-    display:flex; flex-direction:column; align-items:stretch; justify-content:center;
-    width:100%; max-width:640px; margin:0 auto; gap:clamp(32px,5vw,56px);
+    display:grid; grid-template-columns:repeat(2,1fr); align-items:center; justify-content:center;
+    width:100%; max-width:900px; margin:0 auto; gap:clamp(24px,4vw,48px);
   }
   .ploog-page .logo-thumb{
     width:100%; display:flex; align-items:center; justify-content:center;
     cursor:zoom-in; pointer-events:auto; transition:opacity .15s ease;
     text-decoration:none; color:inherit;
+  }
+  @media (max-width:520px){
+    .ploog-page .logo-row{grid-template-columns:1fr;}
   }
   .ploog-page .logo-thumb:hover{opacity:.8;}
   .ploog-page .logo-thumb img{
