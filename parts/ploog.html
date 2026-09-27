@@ -110,6 +110,29 @@
   .ploog-page .swatch .chip{width:100%; height:52px; border-radius:4px; margin-bottom:14px;}
   .ploog-page .swatch .name{font-family:'Space Grotesk',sans-serif; color:var(--paper); font-size:14px;}
   .ploog-page .swatch .hex{color:var(--paper); opacity:.5; font-size:12px; margin-top:3px;}
+
+  /* Back to homepage link */
+  .ploog-page .back-home{
+    position:absolute; top:5%; left:5%; z-index:5; display:flex; align-items:center; gap:8px;
+    font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--paper); opacity:.55; text-decoration:none; transition:opacity .15s ease;
+  }
+  .ploog-page .back-home:hover{opacity:1;}
+  .ploog-page .back-home svg{width:14px; height:14px; flex-shrink:0;}
+
+  /* Floating back-to-top button */
+  .ploog-page .back-to-top{
+    position:fixed; right:32px; bottom:32px; width:48px; height:48px; border-radius:50%;
+    background:var(--purple); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.35); cursor:pointer; text-decoration:none; z-index:9998;
+    opacity:1; visibility:visible;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .ploog-page .back-to-top:hover{background:var(--red); transform:translateY(-2px);}
+  .ploog-page .back-to-top svg{width:20px; height:20px; stroke:var(--paper);}
+  @media (max-width:700px){
+    .ploog-page .back-to-top{right:18px; bottom:18px; width:42px; height:42px;}
+  }
 </style>
 
 <div class="ploog-page">
@@ -126,6 +149,11 @@
     </div>
 
     <div class="corner-r">No. 001</div>
+
+    <a href="index.html" class="back-home" aria-label="Back to homepage">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Home
+    </a>
   </div>
   
   <div class="info">
@@ -194,6 +222,10 @@
     <img src="images/ploog_logo_05.jpg" alt="ploog logo full size"/>
   </div>
 
+  <a href="#" id="ploog-back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </a>
+
 </div>
 
 <script>
@@ -222,4 +254,22 @@
   };
   // Auto-run in case this <script> actually executes on insertion.
   window.initPloogCover();
+
+  window.initPloogBackToTop = function(){
+    const btn = document.getElementById('ploog-back-to-top');
+    if (!btn || btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      // Try the window first, then fall back to the nearest scrollable ancestor
+      // in case this snippet is embedded inside a scrolling container.
+      window.scrollTo({top:0, behavior:'smooth'});
+      let el = btn.closest('.ploog-page');
+      while (el){
+        if (el.scrollTop > 0){ el.scrollTo({top:0, behavior:'smooth'}); break; }
+        el = el.parentElement;
+      }
+    });
+  };
+  window.initPloogBackToTop();
 </script>
