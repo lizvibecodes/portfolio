@@ -1,0 +1,225 @@
+<link href="https://fonts.googleapis.com/css2?family=family=Roboto:wght@300;400&family=Space+Grotesk:wght@500;700&family=Inter:wght@500&display=swap" rel="stylesheet">
+<style>
+  .roots-page{
+    --ink:#0F0F11; --purple:#6449b1; --red:#FF3B30; --orange:#FF7A45; --paper:#F3F1EC;
+    background:var(--ink); padding: 0 80px;
+  }
+  
+  
+  .roots-page *{box-sizing:border-box;}
+  @media (max-width:700px){
+    .roots-page{padding:0 20px;}
+    .roots-page .cover{aspect-ratio:16/9;}
+  }
+  .roots-page .cover{
+    position:relative; width:100%; aspect-ratio:21/6; overflow:hidden; 
+  }
+  .roots-page .grain{position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay; pointer-events:none;}
+  .roots-page #roots-cover-bars{position:absolute; left:0; right:0; bottom:0; height:62%; display:flex; align-items:flex-end;}
+  .roots-page .bar{flex:1 1 auto; min-width:1px;}
+  .roots-page .cluster{position:absolute;}
+  .roots-page .glow{filter:drop-shadow(0 0 40px rgba(255,90,50,.55));}
+  .roots-page .brand{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; width:100%;
+    display:flex; align-items:center; justify-content:center; padding:0 60px;
+  }
+  .roots-page .brand-banner{
+    display:block; width:100%; height:auto;
+    max-width:100%;
+    object-fit:contain; margin:0 auto;
+  }
+  .roots-page .wordmark{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--paper);
+    font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; margin:0;
+  }
+  .roots-page .tagline{
+    font-family:'Inter',sans-serif; font-weight:500; color:var(--paper); opacity:.55;
+    font-size:clamp(11px,1.1vw,15px); letter-spacing:0.32em; margin-top:14px; text-transform:uppercase;
+  }
+  .roots-page .corner{
+    position:absolute; top:5%; left:5%; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em;
+    color:var(--paper); opacity:.4; text-transform:uppercase;
+  }
+  .roots-page .corner-r{
+    position:absolute; top:5%; right:5%; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.14em;
+    color:var(--paper); opacity:.4;
+  }
+  .roots-page .logo-slot{
+    position:absolute; display:flex; align-items:center; justify-content:center;
+    border:0; background:none; padding:0; margin:0; outline:0;
+    resize:none; overflow:visible; cursor:default; user-select:none; pointer-events:none;
+  }
+  .roots-page .logo-slot img{
+    display:block; width:auto; height:auto; max-width:100%; max-height:100%;
+    border:0; outline:0; user-select:none; -webkit-user-drag:none;
+  }
+  .roots-page .logo-slot.wordmark{
+    position:static; width:auto; height:auto; margin:0 auto; color:#6449b1;
+    font-family:'Roboto',sans-serif; font-weight:400;
+    font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; text-transform:uppercase;
+  }
+
+  /* Logo section — its own block below the cover, full-width stacked logos */
+  .roots-page .logo-section{
+    padding:clamp(40px,6vw,72px) 60px; background:var(--ink);
+  }
+  .roots-page .logo-row{
+    display:grid; grid-template-columns:repeat(2,1fr); align-items:center; justify-content:center;
+    width:100%; max-width:100%; margin:0 auto; gap:clamp(24px,4vw,48px);
+  }
+  .roots-page .logo-thumb{
+    width:100%; display:flex; align-items:center; justify-content:center;
+    cursor:zoom-in; pointer-events:auto; transition:opacity .15s ease;
+    text-decoration:none; color:inherit;
+  }
+  @media (max-width:520px){
+    .roots-page .logo-row{grid-template-columns:1fr;}
+  }
+  .roots-page .logo-thumb:hover{opacity:.8;}
+  .roots-page .logo-thumb img{
+    width:100%; height:auto; max-width:100%; object-fit:contain;
+    display:block; border:0; outline:0; user-select:none; -webkit-user-drag:none;
+  }
+
+  /* Lightbox — pure CSS, opens via :target so it works with no JS */
+  .roots-page .lightbox{
+    position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center;
+    padding:5vw;
+  }
+  .roots-page .lightbox:target{display:flex;}
+  .roots-page .lightbox-backdrop{
+    position:absolute; inset:0; cursor:zoom-out;
+    background:rgba(15,15,17,.8); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  }
+  .roots-page .lightbox img{
+    position:relative; max-width:90vw; max-height:90vh; width:auto; height:auto; object-fit:contain;
+    box-shadow:0 30px 80px rgba(0,0,0,.55); border-radius:6px; pointer-events:none;
+  }
+  .roots-page .lightbox-close{
+    position:absolute; top:24px; right:28px; width:40px; height:40px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;
+    background:rgba(243,241,236,.08); color:var(--paper); font-family:'Inter',sans-serif;
+    font-size:20px; line-height:1; border:1px solid rgba(243,241,236,.16); text-decoration:none;
+  }
+
+  .roots-page .info{max-width:100%; margin:0 auto; padding: 60px 60px 80px; font-family:'Inter',sans-serif;}
+  .roots-page .info h2{font-family:'Roboto',sans-serif; font-weight:700; color:var(--paper); font-size:26px; margin:0 0 16px;}
+  .roots-page .info p.desc{font-family:'Roboto',sans-serif; color:var(--paper); opacity:.65; line-height:1.7; font-size:16px; margin:0 0 48px;}
+  .roots-page .palette{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:2px; background:rgba(243,241,236,.12); border:1px solid rgba(243,241,236,.12);}
+  .roots-page .swatch{background:var(--ink); padding:22px 18px;}
+  .roots-page .swatch .chip{width:100%; height:52px; border-radius:4px; margin-bottom:14px;}
+  .roots-page .swatch .name{font-family:'Space Grotesk',sans-serif; color:var(--paper); font-size:14px;}
+  .roots-page .swatch .hex{color:var(--paper); opacity:.5; font-size:12px; margin-top:3px;}
+</style>
+
+<div class="roots-page">
+  <div class="cover" id="roots-cover">
+    <svg class="grain" width="100%" height="100%">
+      <filter id="roots-noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#roots-noise)" opacity="0.06"/>
+    </svg>
+
+    <div id="roots-cover-bars"></div>
+
+    <div class="brand">
+      <img class="brand-banner" src="images/roots_banner.png" alt="roots — Unlock Collective Intelligence" />
+    </div>
+
+    <div class="corner-r">No. 003</div>
+  </div>
+  
+  <div class="info">
+    
+	<h2>The Concept</h2>
+    <p class="desc">Root & Radiance had a clear vision for holistic self-care, but their identity needed to translate that warmth and luxury into a tangible system. I developed an earthy color palette, elegant typography, and subtle touches of luxury, choosing every detail from the logo to a refined tone of voice to reflect authenticity and upscale appeal.</p>
+	
+	<h2>The Challenge</h2>
+	<p class="desc">Their social media materials were scattered and lacked cohesion. Different fonts, layouts, and text treatments, with no clear standards, created a disjointed digital presence that made it difficult for audiences to recognize or connect with the brand.</p>
+	
+	<h2>My approach</h2>
+	<p class="desc">I built a unified visual framework anchored by a polished, harmonious design system. Every touchpoint was thoughtfully aligned to embody the salon's commitment to nourishment, transformation, and intention.</p>
+	
+	<h2>The Result</h2>
+	<p class="desc">The updated visuals and messaging amplify warmth and clarity, helping Root & Radiance stand out as both inviting and luxurious, and ensuring the brand radiates as brightly as its promise.</p>
+
+    <h2>Color palette</h2>
+    <div class="palette">
+		<div class="swatch"><div class="chip" style="background:#7B4A4A;"></div><div class="name">Rose Taupe</div><div class="hex">#7B4A4A</div></div>
+		<div class="swatch"><div class="chip" style="background:#F3DDDA;"></div><div class="name">Misty Rose</div><div class="hex">#F3DDDA</div></div>
+		<div class="swatch"><div class="chip" style="background:#F5F5DC;"></div><div class="name">Beige</div><div class="hex">#F5F5DC</div></div>
+		<div class="swatch"><div class="chip" style="background:#F3C677;"></div><div class="name">Sandy Brown</div><div class="hex">#F3C677</div></div>
+		<div class="swatch"><div class="chip" style="background:#DADFF7;"></div><div class="name">Lavender</div><div class="hex">#DADFF7</div></div>
+    </div>
+  </div>  
+
+  <div class="logo-section">
+    <div class="logo-row" id="roots-logo-row">
+	  <a class="logo-thumb" href="#roots-lb-1"><img alt="roots logo" src="images/roots_logo_01.jpg" draggable="false"/></a>
+      <a class="logo-thumb" href="#roots-lb-2"><img alt="roots logo" src="images/roots_logo_02.jpg" draggable="false"/></a>
+      <a class="logo-thumb" href="#roots-lb-3"><img alt="roots logo" src="images/roots_logo_03.jpg" draggable="false"/></a>
+      <a class="logo-thumb" href="#roots-lb-4"><img alt="roots logo" src="images/roots_logo_04.jpg" draggable="false"/></a>
+	  <a class="logo-thumb" href="#roots-lb-5"><img alt="roots logo" src="images/roots_logo_05.jpg" draggable="false"/></a>
+	  <a class="logo-thumb" href="#roots-lb-6"><img alt="roots logo" src="images/roots_logo_06.jpg" draggable="false"/></a>
+    </div>
+  </div>
+
+  <div class="lightbox" id="roots-lb-1">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/roots_logo_01.jpg" alt="roots logo full size"/>
+  </div>
+  <div class="lightbox" id="roots-lb-2">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/roots_logo_02.jpg" alt="roots logo full size"/>
+  </div>
+  <div class="lightbox" id="roots-lb-3">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/roots_logo_03.jpg" alt="roots logo full size"/>
+  </div>
+  <div class="lightbox" id="roots-lb-4">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/roots_logo_04.jpg" alt="roots logo full size"/>
+  </div>
+  <div class="lightbox" id="roots-lb-5">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/roots_logo_05.jpg" alt="roots logo full size"/>
+  </div>
+  <div class="lightbox" id="roots-lb-6">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/roots_logo_06.jpg" alt="roots logo full size"/>
+  </div>
+
+</div>
+
+<script>
+  window.initrootsCover = function(){
+    const bars = document.getElementById('roots-cover-bars');
+    if (!bars || bars.dataset.built) return;
+    bars.dataset.built = '1';
+    const N = 160;
+    const purple = [124,92,252], red = [255,59,48], orange = [255,122,69];
+    function lerp(a,b,t){return a+(b-a)*t;}
+    function mix(c1,c2,t){return `rgb(${lerp(c1[0],c2[0],t)|0},${lerp(c1[1],c2[1],t)|0},${lerp(c1[2],c2[2],t)|0})`;}
+    for(let i=0;i<N;i++){
+      const t = i/(N-1);
+      const wave = Math.sin(t*Math.PI*2.4 + 0.6) * 0.5 + 0.5;
+      const rise = Math.pow(t,1.6);
+      const h = 6 + wave*22 + rise*62;
+      const color = t < 0.55 ? mix(purple, red, t/0.55) : mix(red, orange, (t-0.55)/0.45);
+      const bar = document.createElement('div');
+      bar.className='bar';
+      bar.style.height = h + '%';
+      bar.style.background = color;
+      bar.style.opacity = 0.16 + rise*0.6;
+      bar.style.margin = '0 1px';
+      bars.appendChild(bar);
+    }
+  };
+  // Auto-run in case this <script> actually executes on insertion.
+  window.initrootsCover();
+</script>
