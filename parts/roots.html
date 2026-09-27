@@ -8,8 +8,22 @@
   
   .roots-page *{box-sizing:border-box;}
   @media (max-width:700px){
-    .roots-page{padding:0 20px;}
-    .roots-page .cover{aspect-ratio:16/9;}
+    .roots-page{padding:0;}
+    .roots-page .cover{aspect-ratio:5/4;}
+    .roots-page .brand{padding:0 24px;}
+    .roots-page .corner-r{top:20px; right:20px; font-size:12px;}
+    .roots-page .back-home{top:18px; left:20px; font-size:13px; letter-spacing:.14em; min-height:44px;}
+    .roots-page .info{padding:40px 20px 48px;}
+    .roots-page .info h2{font-size:27px; margin-bottom:12px;}
+    .roots-page .info p.desc{font-size:17px; line-height:1.65; margin-bottom:34px;}
+    .roots-page .palette{grid-template-columns:1fr;}
+    .roots-page .swatch{padding:18px;}
+    .roots-page .swatch .chip{height:56px;}
+    .roots-page .logo-section{padding:36px 20px 56px;}
+    .roots-page .logo-row{grid-template-columns:1fr; gap:24px;}
+    .roots-page .lightbox{padding:20px;}
+    .roots-page .lightbox img{max-width:calc(100vw - 40px); max-height:80vh;}
+    .roots-page .lightbox-close{top:14px; right:14px; width:44px; height:44px;}
   }
   .roots-page .cover{
     position:relative; width:100%; aspect-ratio:21/6; overflow:hidden; 
@@ -131,7 +145,7 @@
   .roots-page .back-to-top:hover{background:var(--red); transform:translateY(-2px);}
   .roots-page .back-to-top svg{width:20px; height:20px; stroke:var(--paper);}
   @media (max-width:700px){
-    .roots-page .back-to-top{right:18px; bottom:18px; width:42px; height:42px;}
+    .roots-page .back-to-top{right:18px; bottom:18px; width:48px; height:48px;}
   }
 </style>
 
