@@ -1,0 +1,288 @@
+<link href="https://fonts.googleapis.com/css2?family=family=Roboto:wght@300;400&family=Space+Grotesk:wght@500;700&family=Inter:wght@500&display=swap" rel="stylesheet">
+<style>
+  .orvelle-page{
+    --ink:#0F0F11; --purple:#6449b1; --red:#FF3B30; --orange:#FF7A45; --paper:#F3F1EC;
+    background:var(--ink); padding: 0 80px;
+  }
+  
+  
+  .orvelle-page *{box-sizing:border-box;}
+  @media (max-width:700px){
+    .orvelle-page{padding:0;}
+    .orvelle-page .cover{aspect-ratio:5/4;}
+    .orvelle-page .brand{padding:0 24px;}
+    .orvelle-page .corner-r{top:20px; right:20px; font-size:12px;}
+    .orvelle-page .back-home{top:18px; left:20px; font-size:13px; letter-spacing:.14em; min-height:44px;}
+    .orvelle-page .info{padding:40px 20px 48px;}
+    .orvelle-page .info h2{font-size:27px; margin-bottom:12px;}
+    .orvelle-page .info p.desc{font-size:17px; line-height:1.65; margin-bottom:34px;}
+    .orvelle-page .palette{grid-template-columns:1fr;}
+    .orvelle-page .swatch{padding:18px;}
+    .orvelle-page .swatch .chip{height:56px;}
+    .orvelle-page .logo-section{padding:36px 20px 56px;}
+    .orvelle-page .logo-row{grid-template-columns:1fr; gap:24px;}
+    .orvelle-page .lightbox{padding:20px;}
+    .orvelle-page .lightbox img{max-width:calc(100vw - 40px); max-height:80vh;}
+    .orvelle-page .lightbox-close{top:14px; right:14px; width:44px; height:44px;}
+  }
+  .orvelle-page .cover{
+    position:relative; width:100%; aspect-ratio:21/6; overflow:hidden; 
+  }
+  .orvelle-page .grain{position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay; pointer-events:none;}
+  .orvelle-page #orvelle-cover-bars{position:absolute; left:0; right:0; bottom:0; height:62%; display:flex; align-items:flex-end;}
+  .orvelle-page .bar{flex:1 1 auto; min-width:1px;}
+  .orvelle-page .cluster{position:absolute;}
+  .orvelle-page .glow{filter:drop-shadow(0 0 40px rgba(255,90,50,.55));}
+  .orvelle-page .brand{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; width:100%;
+    display:flex; align-items:center; justify-content:center; padding:0 60px;
+  }
+  .orvelle-page .brand-banner{
+    display:block; width:100%; height:auto;
+    max-width:100%;
+    object-fit:contain; margin:0 auto;
+  }
+  .orvelle-page .wordmark{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--paper);
+    font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; margin:0;
+  }
+  .orvelle-page .tagline{
+    font-family:'Inter',sans-serif; font-weight:500; color:var(--paper); opacity:.55;
+    font-size:clamp(11px,1.1vw,15px); letter-spacing:0.32em; margin-top:14px; text-transform:uppercase;
+  }
+  .orvelle-page .corner{
+    position:absolute; top:5%; left:5%; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em;
+    color:var(--paper); opacity:.4; text-transform:uppercase;
+  }
+  .orvelle-page .corner-r{
+    position:absolute; top:5%; right:5%; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.14em;
+    color:var(--paper); opacity:.4;
+  }
+  .orvelle-page .logo-slot{
+    position:absolute; display:flex; align-items:center; justify-content:center;
+    border:0; background:none; padding:0; margin:0; outline:0;
+    resize:none; overflow:visible; cursor:default; user-select:none; pointer-events:none;
+  }
+  .orvelle-page .logo-slot img{
+    display:block; width:auto; height:auto; max-width:100%; max-height:100%;
+    border:0; outline:0; user-select:none; -webkit-user-drag:none;
+  }
+  .orvelle-page .logo-slot.wordmark{
+    position:static; width:auto; height:auto; margin:0 auto; color:#6449b1;
+    font-family:'Roboto',sans-serif; font-weight:400;
+    font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; text-transform:uppercase;
+  }
+
+  /* Logo section — its own block below the cover, full-width stacked logos */
+  .orvelle-page .logo-section{
+    padding:clamp(40px,6vw,72px) 60px; background:var(--ink);
+  }
+  .orvelle-page .logo-row{
+    display:grid; grid-template-columns:repeat(2,1fr); align-items:center; justify-content:center;
+    width:100%; max-width:100%; margin:0 auto; gap:clamp(24px,4vw,48px);
+  }
+  .orvelle-page .logo-thumb{
+    width:100%; display:flex; align-items:center; justify-content:center;
+    cursor:zoom-in; pointer-events:auto; transition:opacity .15s ease;
+    text-decoration:none; color:inherit;
+  }
+  @media (max-width:520px){
+    .orvelle-page .logo-row{grid-template-columns:1fr;}
+  }
+  .orvelle-page .logo-thumb:hover{opacity:.8;}
+  .orvelle-page .logo-thumb img{
+    width:100%; height:auto; max-width:100%; object-fit:contain;
+    display:block; border:0; outline:0; user-select:none; -webkit-user-drag:none;
+  }
+
+  /* Lightbox — pure CSS, opens via :target so it works with no JS */
+  .orvelle-page .lightbox{
+    position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center;
+    padding:5vw;
+  }
+  .orvelle-page .lightbox:target{display:flex;}
+  .orvelle-page .lightbox-backdrop{
+    position:absolute; inset:0; cursor:zoom-out;
+    background:rgba(15,15,17,.8); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  }
+  .orvelle-page .lightbox img{
+    position:relative; max-width:90vw; max-height:90vh; width:auto; height:auto; object-fit:contain;
+    box-shadow:0 30px 80px rgba(0,0,0,.55); border-radius:6px; pointer-events:none;
+  }
+  .orvelle-page .lightbox-close{
+    position:absolute; top:24px; right:28px; width:40px; height:40px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;
+    background:rgba(243,241,236,.08); color:var(--paper); font-family:'Inter',sans-serif;
+    font-size:20px; line-height:1; border:1px solid rgba(243,241,236,.16); text-decoration:none;
+  }
+
+  .orvelle-page .info{max-width:100%; margin:0 auto; padding: 60px 60px 80px; font-family:'Inter',sans-serif;}
+  .orvelle-page .info h2{font-family:'Roboto',sans-serif; font-weight:700; color:var(--paper); font-size:26px; margin:0 0 16px;}
+  .orvelle-page .info p.desc{font-family:'Roboto',sans-serif; color:var(--paper); opacity:.65; line-height:1.7; font-size:16px; margin:0 0 48px;}
+  .orvelle-page .palette{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:2px; background:rgba(243,241,236,.12); border:1px solid rgba(243,241,236,.12);}
+  .orvelle-page .swatch{background:var(--ink); padding:22px 18px;}
+  .orvelle-page .swatch .chip{width:100%; height:52px; border-radius:4px; margin-bottom:14px;}
+  .orvelle-page .swatch .name{font-family:'Space Grotesk',sans-serif; color:var(--paper); font-size:14px;}
+  .orvelle-page .swatch .hex{color:var(--paper); opacity:.5; font-size:12px; margin-top:3px;}
+
+  /* Back to homepage link */
+  .orvelle-page .back-home{
+    position:absolute; top:5%; left:5%; z-index:5; display:flex; align-items:center; gap:8px;
+    font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--paper); opacity:.55; text-decoration:none; transition:opacity .15s ease;
+  }
+  .orvelle-page .back-home:hover{opacity:1;}
+  .orvelle-page .back-home svg{width:14px; height:14px; flex-shrink:0;}
+
+  /* Floating back-to-top button */
+  .orvelle-page .back-to-top{
+    position:fixed; right:32px; bottom:32px; width:48px; height:48px; border-radius:50%;
+    background:var(--purple); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.35); cursor:pointer; text-decoration:none; z-index:9998;
+    opacity:1; visibility:visible;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .orvelle-page .back-to-top:hover{background:var(--red); transform:translateY(-2px);}
+  .orvelle-page .back-to-top svg{width:20px; height:20px; stroke:var(--paper);}
+  @media (max-width:700px){
+    .orvelle-page .back-to-top{right:18px; bottom:18px; width:48px; height:48px;}
+  }
+</style>
+
+<div class="orvelle-page">
+  <div class="cover" id="orvelle-cover">
+    <svg class="grain" width="100%" height="100%">
+      <filter id="orvelle-noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#orvelle-noise)" opacity="0.06"/>
+    </svg>
+
+    <div id="orvelle-cover-bars"></div>
+
+    <div class="brand">
+      <img class="brand-banner" src="images/orvelle_banner.png" alt="orvelle — interior design" />
+    </div>
+
+    <div class="corner-r">No. 001</div>
+
+    <a href="index.html" class="back-home" aria-label="Back to homepage">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Home
+    </a>
+  </div>
+  
+  <div class="info">
+    
+	<h2>The Concept</h2>
+    <p class="desc">The mark reads left to right as a story: a loose, human waveform; one person's raw idea; resolves into a structured cluster of connected nodes. Purple is the individual signal. The red-to-orange gradient is what happens when that signal joins the network: it gets shape, connection, and attribution. This cover carries the same arc;  a waveform rising from the individual (purple) into the network (ember); so the same logic that drives the logo drives every asset in the system.</p>
+	
+	<h2>The Challenge</h2>
+	<p class="desc">Founders needed a professional, trusted visual presence to build early anticipation and engage prospective partners without exposing sensitive proprietary concepts ahead of launch.</p>
+	
+	<h2>My approach</h2>
+	<p class="desc">I designed a clean, minimalistic identity system centered around a dynamic geometric logo symbolizing flow, connection, and clarity. Supported by bold typography and a secure, collaborative aesthetic, the visual system establishes orvelle as an authoritative, professional digital space.</p>
+	
+	<h2>The Result</h2>
+	<p class="desc">Provided immediate visual credibility for pre-launch outreach, enabling the founders to confidently pitch strategic partnerships and attract early-stage adopters</p>
+
+    <h2>Color palette</h2>
+    <div class="palette">
+      <div class="swatch"><div class="chip" style="background:#4A1926;"></div><div class="name">Night Bordeaux</div><div class="hex">#4A1926</div></div>
+      <div class="swatch"><div class="chip" style="background:#143109;"></div><div class="name">Black Forrest</div><div class="hex">#143109</div></div>
+      <div class="swatch"><div class="chip" style="background:#967710;"></div><div class="name">Bronze</div><div class="hex">#967710</div></div>
+      <div class="swatch"><div class="chip" style="background:#F2EDE4;"></div><div class="name">Bone</div><div class="hex">#F2EDE4</div></div>
+      <div class="swatch"><div class="chip" style="background:#EEE2CF;"></div><div class="name">Linen</div><div class="hex">#EEE2CF</div></div>
+    </div>
+  </div>  
+
+  <div class="logo-section">
+    <div class="logo-row" id="orvelle-logo-row">
+      <a class="logo-thumb" href="#orvelle-lb-2"><img alt="orvelle logo" src="images/orvelle_logo_01.jpg" draggable="false"/></a>
+      <a class="logo-thumb" href="#orvelle-lb-3"><img alt="orvelle logo" src="images/orvelle_logo_02.jpg" draggable="false"/></a>
+      <a class="logo-thumb" href="#orvelle-lb-4"><img alt="orvelle logo" src="images/orvelle_logo_03.jpg" draggable="false"/></a>
+	  <a class="logo-thumb" href="#orvelle-lb-5"><img alt="orvelle logo" src="images/orvelle_logo_04.jpg" draggable="false"/></a>
+	  <a class="logo-thumb" href="#orvelle-lb-6"><img alt="orvelle logo" src="images/orvelle_logo_05.jpg" draggable="false"/></a>
+    </div>
+  </div>
+
+  <div class="lightbox" id="orvelle-lb-1">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/orvelle_logo_00.jpg" alt="orvelle logo full size"/>
+  </div>
+  <div class="lightbox" id="orvelle-lb-2">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/orvelle_logo_01.png" alt="orvelle logo full size"/>
+  </div>
+  <div class="lightbox" id="orvelle-lb-3">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/orvelle_logo_02.png" alt="orvelle logo full size"/>
+  </div>
+  <div class="lightbox" id="orvelle-lb-4">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/orvelle_logo_03.jpg" alt="orvelle logo full size"/>
+  </div>
+  <div class="lightbox" id="orvelle-lb-5">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/orvelle_logo_04.jpg" alt="orvelle logo full size"/>
+  </div>
+  <div class="lightbox" id="orvelle-lb-6">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/orvelle_logo_05.jpg" alt="orvelle logo full size"/>
+  </div>
+
+  <a href="#" id="orvelle-back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </a>
+
+</div>
+
+<script>
+  window.initorvelleCover = function(){
+    const bars = document.getElementById('orvelle-cover-bars');
+    if (!bars || bars.dataset.built) return;
+    bars.dataset.built = '1';
+    const N = 160;
+    const purple = [124,92,252], red = [255,59,48], orange = [255,122,69];
+    function lerp(a,b,t){return a+(b-a)*t;}
+    function mix(c1,c2,t){return `rgb(${lerp(c1[0],c2[0],t)|0},${lerp(c1[1],c2[1],t)|0},${lerp(c1[2],c2[2],t)|0})`;}
+    for(let i=0;i<N;i++){
+      const t = i/(N-1);
+      const wave = Math.sin(t*Math.PI*2.4 + 0.6) * 0.5 + 0.5;
+      const rise = Math.pow(t,1.6);
+      const h = 6 + wave*22 + rise*62;
+      const color = t < 0.55 ? mix(purple, red, t/0.55) : mix(red, orange, (t-0.55)/0.45);
+      const bar = document.createElement('div');
+      bar.className='bar';
+      bar.style.height = h + '%';
+      bar.style.background = color;
+      bar.style.opacity = 0.16 + rise*0.6;
+      bar.style.margin = '0 1px';
+      bars.appendChild(bar);
+    }
+  };
+  // Auto-run in case this <script> actually executes on insertion.
+  window.initorvelleCover();
+
+  window.initorvelleBackToTop = function(){
+    const btn = document.getElementById('orvelle-back-to-top');
+    if (!btn || btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      // Try the window first, then fall back to the nearest scrollable ancestor
+      // in case this snippet is embedded inside a scrolling container.
+      window.scrollTo({top:0, behavior:'smooth'});
+      let el = btn.closest('.orvelle-page');
+      while (el){
+        if (el.scrollTop > 0){ el.scrollTo({top:0, behavior:'smooth'}); break; }
+        el = el.parentElement;
+      }
+    });
+  };
+  window.initorvelleBackToTop();
+</script>
