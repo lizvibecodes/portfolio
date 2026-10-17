@@ -1,5 +1,47 @@
   <!-- Top bar -->
-  <div style="display: flex; align-items: center; justify-content: space-between; padding: 22px 64px;">
-    <a href="." class="eyebrow" style="color:#8A8676;">Portfolio 2026</a>
-    <a href="mailto:lizelda@lvf.design" class="eyebrow" style="background:#2E8F47; color:#FBF7EC; padding:12px 22px; border-radius:2px;">Hire me</a>
+  <div style="display: flex; align-items: center; column-gap: 36px; padding: 22px 64px;">
+    <div class="eyebrow" style="color:#8A8676">Portfolio 2026</div>
+
+    <nav class="top-nav" aria-label="Main" style="display:flex; align-items:center; column-gap:36px;">
+      <a href="." class="eyebrow nav-link">Home</a>
+
+      <div class="dropdown">
+        <button type="button" class="eyebrow nav-link dd-toggle" aria-haspopup="true" aria-expanded="false">Projects<span class="dd-caret" aria-hidden="true"></span></button>
+        <div class="dd-menu">
+          <div class="dd-menu-inner">
+            <a href="project_ploog.html" class="eyebrow nav-link">Ploog</a>
+            <a href="project_orvelle.html" class="eyebrow nav-link">Orvelle</a>
+            <a href="project_roots.html" class="eyebrow nav-link">Roots</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <a href="mailto:lizelda@lvf.design" class="eyebrow" style="margin-left:auto; background:#2E8F47; color:#FBF7EC; padding:12px 22px; border-radius:2px;">Hire me</a>
   </div>
+
+  <script>
+    (function () {
+      var dd = document.querySelector('.dropdown');
+      if (!dd) return;
+      var btn = dd.querySelector('.dd-toggle');
+      function set(open) {
+        dd.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        set(!dd.classList.contains('open'));
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) set(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          set(false);
+          if (dd.contains(document.activeElement)) document.activeElement.blur();
+        }
+      });
+      dd.addEventListener('mouseleave', function () { set(false); });
+    })();
+  </script>
