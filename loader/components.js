@@ -8,7 +8,9 @@ async function loadComponent(elementId, file) {
     const html = await response.text();
 
     if (elementId === "head") {
-        document.head.innerHTML = html;
+        if (!document.head.children.length) {
+            document.head.innerHTML = html;
+        }
         return;
     }
 
