@@ -120,6 +120,81 @@ button.btn:hover{color:#fff}
 
 footer{background:var(--burg);color:var(--cream);padding:34px 0;font-size:1rem}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* Floating & pulsating back-to-portfolio button */
+.back-to-portfolio{
+  position:fixed;
+  right:32px;
+  bottom:calc(32px + env(safe-area-inset-bottom, 0px));
+  z-index:9998;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 24px;
+  border-radius:999px;
+  background:var(--burg);
+  color:var(--cream);
+  font-family:var(--sans);
+  font-size:1rem;
+  font-weight:500;
+  letter-spacing:.05em;
+  text-decoration:none;
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+  border:1.5px solid var(--gold);
+  animation:orvellePulse 2.4s infinite ease-in-out;
+  transition:background .25s ease, color .25s ease, border-color .25s ease, transform .2s ease, box-shadow .2s ease;
+}
+.back-to-portfolio svg{
+  width:18px;
+  height:18px;
+  flex-shrink:0;
+  stroke:var(--cream);
+  transition:stroke .25s ease, transform .2s ease;
+}
+.back-to-portfolio:hover{
+  background:var(--gold);
+  color:#fff;
+  border-color:var(--gold);
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(0,0,0,.45);
+}
+.back-to-portfolio:hover svg{
+  stroke:#fff;
+  transform:translateX(-3px);
+}
+@keyframes orvellePulse{
+  0%{
+    box-shadow:0 8px 24px rgba(0,0,0,.35), 0 0 0 0 rgba(72,26,37,.7);
+    transform:scale(1);
+  }
+  50%{
+    box-shadow:0 10px 28px rgba(0,0,0,.45), 0 0 0 12px rgba(72,26,37,0);
+    transform:scale(1.03);
+  }
+  100%{
+    box-shadow:0 8px 24px rgba(0,0,0,.35), 0 0 0 0 rgba(72,26,37,0);
+    transform:scale(1);
+  }
+}
+@media(max-width:600px){
+  .back-to-portfolio{
+    right:18px;
+    bottom:calc(18px + env(safe-area-inset-bottom, 0px));
+    padding:11px 18px;
+    font-size:.9rem;
+    gap:8px;
+  }
+  .back-to-portfolio svg{
+    width:16px;
+    height:16px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .back-to-portfolio{
+    animation:none;
+  }
+}
 </style>
 </head>
 <body>
@@ -237,6 +312,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <div class="wrap"><span>Maison Orvelle</span><span>@maisonorvelle</span></div>
 </footer>
 
+<a href="../project_orvelle.html" id="orvelle-back-to-portfolio" class="back-to-portfolio" aria-label="Back to Portfolio">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+  <span>Back to Portfolio</span>
+</a>
+
 <script>
 document.getElementById("go").addEventListener("click",function(){
   var n=document.getElementById("n").value.trim(),e=document.getElementById("e").value.trim(),m=document.getElementById("m").value.trim(),s=document.getElementById("sent");
@@ -245,6 +325,13 @@ document.getElementById("go").addEventListener("click",function(){
   s.textContent="Opening your email app to send the enquiry.";
   window.location.href="mailto:hello@maisonorvelle.com?subject="+encodeURIComponent("Orvelle consultation enquiry")+"&body="+body;
 });
+
+window.initOrvelleBackToPortfolio = function(){
+  const btn = document.getElementById('orvelle-back-to-portfolio');
+  if (!btn || btn.dataset.bound) return;
+  btn.dataset.bound = '1';
+};
+window.initOrvelleBackToPortfolio();
 </script>
 </body>
 </html>
