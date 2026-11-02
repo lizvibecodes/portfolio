@@ -34,3 +34,4 @@ loadComponent("home", "parts/home.html");
 loadComponent("ploog", "parts/ploog.html");
 loadComponent("roots", "parts/roots.html");
 loadComponent("orvelle", "parts/orvelle.html");
+loadComponent("bridge", "parts/bridge.html");

@@ -1,0 +1,285 @@
+<link href="https://fonts.googleapis.com/css2?family=family=Roboto:wght@300;400&family=Space+Grotesk:wght@500;700&family=Inter:wght@500&display=swap" rel="stylesheet">
+<style>
+  .bridge-page{
+    --ink:#0F0F11; --purple:#4A1926; --red:#143109; --orange:#967710; --paper:#F2EDE4;
+    background:var(--ink); padding: 0 80px;
+  }
+  
+  
+  .bridge-page *{box-sizing:border-box;}
+  @media (max-width:700px){
+    .bridge-page{padding:0;}
+    .bridge-page .cover{aspect-ratio:5/4;}
+    .bridge-page .brand{padding:0 24px;}
+    .bridge-page .corner-r{top:20px; right:20px; font-size:12px;}
+    .bridge-page .back-home{top:18px; left:20px; font-size:13px; letter-spacing:.14em; min-height:44px;}
+    .bridge-page .info{padding:40px 20px 48px;}
+    .bridge-page .info h2{font-size:27px; margin-bottom:12px;}
+    .bridge-page .info p.desc{font-size:17px; line-height:1.65; margin-bottom:34px;}
+    .bridge-page .palette{grid-template-columns:1fr;}
+    .bridge-page .swatch{padding:18px;}
+    .bridge-page .swatch .chip{height:56px;}
+    .bridge-page .logo-section{padding:36px 20px 56px;}
+    .bridge-page .logo-row{grid-template-columns:1fr; gap:24px;}
+    .bridge-page .lightbox{padding:20px;}
+    .bridge-page .lightbox img{max-width:calc(100vw - 40px); max-height:80vh;}
+    .bridge-page .lightbox-close{top:14px; right:14px; width:44px; height:44px;}
+  }
+  .bridge-page .cover{
+    position:relative; width:100%; aspect-ratio:21/6; overflow:hidden; 
+  }
+  .bridge-page .grain{position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay; pointer-events:none;}
+  .bridge-page #bridge-cover-bars{position:absolute; left:0; right:0; bottom:0; height:62%; display:flex; align-items:flex-end;}
+  .bridge-page .bar{flex:1 1 auto; min-width:1px;}
+  .bridge-page .cluster{position:absolute;}
+  .bridge-page .glow{filter:drop-shadow(0 0 40px rgba(255,90,50,.55));}
+  .bridge-page .brand{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; width:100%;
+    display:flex; align-items:center; justify-content:center; padding:0 60px;
+  }
+  .bridge-page .brand-banner{
+    display:block; width:100%; height:auto;
+    max-width:100%;
+    object-fit:contain; margin:0 auto;
+  }
+  .bridge-page .wordmark{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--paper);
+    font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; margin:0;
+  }
+  .bridge-page .tagline{
+    font-family:'Inter',sans-serif; font-weight:500; color:var(--paper); opacity:.55;
+    font-size:clamp(11px,1.1vw,15px); letter-spacing:0.32em; margin-top:14px; text-transform:uppercase;
+  }
+  .bridge-page .corner{
+    position:absolute; top:5%; left:5%; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em;
+    color:var(--paper); opacity:.4; text-transform:uppercase;
+  }
+  .bridge-page .corner-r{
+    position:absolute; top:5%; right:5%; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.14em;
+    color:var(--paper); opacity:.4;
+  }
+  .bridge-page .logo-slot{
+    position:absolute; display:flex; align-items:center; justify-content:center;
+    border:0; background:none; padding:0; margin:0; outline:0;
+    resize:none; overflow:visible; cursor:default; user-select:none; pointer-events:none;
+  }
+  .bridge-page .logo-slot img{
+    display:block; width:auto; height:auto; max-width:100%; max-height:100%;
+    border:0; outline:0; user-select:none; -webkit-user-drag:none;
+  }
+  .bridge-page .logo-slot.wordmark{
+    position:static; width:auto; height:auto; margin:0 auto; color:#6449b1;
+    font-family:'Roboto',sans-serif; font-weight:400;
+    font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; text-transform:uppercase;
+  }
+
+  /* Logo section — its own block below the cover, full-width stacked logos */
+  .bridge-page .logo-section{
+    padding:clamp(40px,6vw,72px) 60px; background:var(--ink);
+  }
+  .bridge-page .logo-row{
+    display:grid; grid-template-columns:repeat(2,1fr); align-items:center; justify-content:center;
+    width:100%; max-width:100%; margin:0 auto; gap:clamp(24px,4vw,48px);
+  }
+  .bridge-page .logo-thumb{
+    width:100%; display:flex; align-items:center; justify-content:center;
+    cursor:zoom-in; pointer-events:auto; transition:opacity .15s ease;
+    text-decoration:none; color:inherit;
+  }
+  @media (max-width:520px){
+    .bridge-page .logo-row{grid-template-columns:1fr;}
+  }
+  .bridge-page .logo-thumb:hover{opacity:.8;}
+  .bridge-page .logo-thumb img{
+    width:100%; height:auto; max-width:100%; object-fit:contain;
+    display:block; border:0; outline:0; user-select:none; -webkit-user-drag:none;
+  }
+
+  /* Lightbox — pure CSS, opens via :target so it works with no JS */
+  .bridge-page .lightbox{
+    position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center;
+    padding:5vw;
+  }
+  .bridge-page .lightbox:target{display:flex;}
+  .bridge-page .lightbox-backdrop{
+    position:absolute; inset:0; cursor:zoom-out;
+    background:rgba(15,15,17,.8); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  }
+  .bridge-page .lightbox img{
+    position:relative; max-width:90vw; max-height:90vh; width:auto; height:auto; object-fit:contain;
+    box-shadow:0 30px 80px rgba(0,0,0,.55); border-radius:6px; pointer-events:none;
+  }
+  .bridge-page .lightbox-close{
+    position:absolute; top:24px; right:28px; width:40px; height:40px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;
+    background:rgba(243,241,236,.08); color:var(--paper); font-family:'Inter',sans-serif;
+    font-size:20px; line-height:1; border:1px solid rgba(243,241,236,.16); text-decoration:none;
+  }
+
+  .bridge-page .info{max-width:100%; margin:0 auto; padding: 60px 60px 80px; font-family:'Inter',sans-serif;}
+  .bridge-page .info h2{font-family:'Roboto',sans-serif; font-weight:700; color:var(--paper); font-size:26px; margin:0 0 16px;}
+  .bridge-page .info p.desc{font-family:'Roboto',sans-serif; color:var(--paper); opacity:.65; line-height:1.7; font-size:16px; margin:0 0 48px;}
+  .bridge-page .palette{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:2px; background:rgba(243,241,236,.12); border:1px solid rgba(243,241,236,.12);}
+  .bridge-page .swatch{background:var(--ink); padding:22px 18px;}
+  .bridge-page .swatch .chip{width:100%; height:52px; border-radius:4px; margin-bottom:14px;}
+  .bridge-page .swatch .name{font-family:'Space Grotesk',sans-serif; color:var(--paper); font-size:14px;}
+  .bridge-page .swatch .hex{color:var(--paper); opacity:.5; font-size:12px; margin-top:3px;}
+
+  /* Back to homepage link */
+  .bridge-page .back-home{
+    position:absolute; top:5%; left:5%; z-index:5; display:flex; align-items:center; gap:8px;
+    font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--paper); opacity:.55; text-decoration:none; transition:opacity .15s ease;
+  }
+  .bridge-page .back-home:hover{opacity:1;}
+  .bridge-page .back-home svg{width:14px; height:14px; flex-shrink:0;}
+
+  /* Floating back-to-top button */
+  .bridge-page .back-to-top{
+    position:fixed; right:32px; bottom:32px; width:48px; height:48px; border-radius:50%;
+    background:var(--purple); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.35); cursor:pointer; text-decoration:none; z-index:9998;
+    opacity:1; visibility:visible;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .bridge-page .back-to-top:hover{background:var(--red); transform:translateY(-2px);}
+  .bridge-page .back-to-top svg{width:20px; height:20px; stroke:var(--paper);}
+  @media (max-width:700px){
+    .bridge-page .back-to-top{right:18px; bottom:18px; width:48px; height:48px;}
+  }
+</style>
+
+<div class="bridge-page">
+  <div class="cover" id="bridge-cover">
+    <svg class="grain" width="100%" height="100%">
+      <filter id="bridge-noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#bridge-noise)" opacity="0.06"/>
+    </svg>
+
+    <div id="bridge-cover-bars"></div>
+
+    <div class="brand">
+      <img class="brand-banner" src="images/bridge_banner.png" alt="bridge — interior design" />
+    </div>
+
+    <div class="corner-r">No. 004</div>
+
+  </div>
+  
+  <div class="info">
+    
+	<h2>The Concept</h2>
+    <p class="desc">The brand narrative unfolds as an architectural journey from structure to emotion. The visual mark represents a room's threshold an archway framing space, proportion, and light translating raw architectural volume into considered human sanctuary. The rich Night Bordeaux acts as the grounded, foundational anchor, while warm Bronze accents signify the touch of refined materials. The soft, neutral palette of Travertine, Bone, and Linen reflects natural stone, grain, and plaster, ensuring the same quiet luxury driving the logo informs every asset in the system.</p>
+	
+	<h2>The Challenge</h2>
+	<p class="desc">The founders needed a sophisticated, tactile visual presence to establish early market authority and engage high-end residential and commercial clients without exposing sensitive portfolio work or proprietary project concepts ahead of launch.</p>
+	
+	<h2>My approach</h2>
+	<p class="desc">I designed a clean, understated identity system centered around geometric precision and tactile warmth. Utilizing DM Serif Display for editorial elegance paired with clean, airy spacing in Inter Light, the visual system establishes bridge as a calm, authoritative design house. The voice and palette speak strictly to light, stone, grain, and proportion completely unhurried and immune to fleeting trends.</p>
+	
+	<h2>The Result</h2>
+	<p class="desc">Provided immediate visual credibility and a sense of timeless luxury for pre-launch outreach, enabling the founders to confidently pitch high-end clientele and attract discerning early-stage collaborators.</p>
+
+    <h2>Color palette</h2>
+    <div class="palette">
+      <div class="swatch"><div class="chip" style="background:#4A1926;"></div><div class="name">Night Bordeaux</div><div class="hex">#4A1926</div></div>
+      <div class="swatch"><div class="chip" style="background:#143109;"></div><div class="name">Black Forrest</div><div class="hex">#143109</div></div>
+      <div class="swatch"><div class="chip" style="background:#967710;"></div><div class="name">Bronze</div><div class="hex">#967710</div></div>
+      <div class="swatch"><div class="chip" style="background:#F2EDE4;"></div><div class="name">Bone</div><div class="hex">#F2EDE4</div></div>
+      <div class="swatch"><div class="chip" style="background:#EEE2CF;"></div><div class="name">Linen</div><div class="hex">#EEE2CF</div></div>
+    </div>
+  </div>  
+
+  <div class="logo-section">
+    <div class="logo-row" id="bridge-logo-row">
+      <a class="logo-thumb" href="#bridge-lb-1"><img alt="bridge logo" src="images/bridge_logo_01.jpg" draggable="false"/></a>
+      <a class="logo-thumb" href="#bridge-lb-2"><img alt="bridge logo" src="images/bridge_logo_02.jpg" draggable="false"/></a>
+      <a class="logo-thumb" href="#bridge-lb-3"><img alt="bridge logo" src="images/bridge_logo_03.jpg" draggable="false"/></a>
+	  <a class="logo-thumb" href="#bridge-lb-4"><img alt="bridge logo" src="images/bridge_logo_04.jpg" draggable="false"/></a>
+	  <a class="logo-thumb" href="#bridge-lb-5"><img alt="bridge logo" src="images/bridge_logo_05.jpg" draggable="false"/></a>
+	  <a class="logo-thumb" href="#bridge-lb-6"><img alt="bridge logo" src="images/bridge_logo_06.jpg" draggable="false"/></a>
+    </div>
+  </div>
+
+  <div class="lightbox" id="bridge-lb-2">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/bridge_logo_01.jpg" alt="bridge logo full size"/>
+  </div>
+  <div class="lightbox" id="bridge-lb-3">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/bridge_logo_02.jpg" alt="bridge logo full size"/>
+  </div>
+  <div class="lightbox" id="bridge-lb-4">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/bridge_logo_03.jpg" alt="bridge logo full size"/>
+  </div>
+  <div class="lightbox" id="bridge-lb-5">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/bridge_logo_04.jpg" alt="bridge logo full size"/>
+  </div>
+  <div class="lightbox" id="bridge-lb-6">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/bridge_logo_05.jpg" alt="bridge logo full size"/>
+  </div>
+  <div class="lightbox" id="bridge-lb-6">
+    <a href="#" class="lightbox-backdrop" aria-label="Close"></a>
+    <a href="#" class="lightbox-close" aria-label="Close">&times;</a>
+    <img src="images/bridge_logo_06.jpg" alt="bridge logo full size"/>
+  </div>  
+
+  <a href="#" id="bridge-back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </a>
+
+</div>
+
+<script>
+  window.initbridgeCover = function(){
+    const bars = document.getElementById('bridge-cover-bars');
+    if (!bars || bars.dataset.built) return;
+    bars.dataset.built = '1';
+    const N = 160;
+    const purple = [124,92,252], red = [255,59,48], orange = [255,122,69];
+    function lerp(a,b,t){return a+(b-a)*t;}
+    function mix(c1,c2,t){return `rgb(${lerp(c1[0],c2[0],t)|0},${lerp(c1[1],c2[1],t)|0},${lerp(c1[2],c2[2],t)|0})`;}
+    for(let i=0;i<N;i++){
+      const t = i/(N-1);
+      const wave = Math.sin(t*Math.PI*2.4 + 0.6) * 0.5 + 0.5;
+      const rise = Math.pow(t,1.6);
+      const h = 6 + wave*22 + rise*62;
+      const color = t < 0.55 ? mix(purple, red, t/0.55) : mix(red, orange, (t-0.55)/0.45);
+      const bar = document.createElement('div');
+      bar.className='bar';
+      bar.style.height = h + '%';
+      bar.style.background = color;
+      bar.style.opacity = 0.16 + rise*0.6;
+      bar.style.margin = '0 1px';
+      bars.appendChild(bar);
+    }
+  };
+  // Auto-run in case this <script> actually executes on insertion.
+  window.initbridgeCover();
+
+  window.initbridgeBackToTop = function(){
+    const btn = document.getElementById('bridge-back-to-top');
+    if (!btn || btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      // Try the window first, then fall back to the nearest scrollable ancestor
+      // in case this snippet is embedded inside a scrolling container.
+      window.scrollTo({top:0, behavior:'smooth'});
+      let el = btn.closest('.bridge-page');
+      while (el){
+        if (el.scrollTop > 0){ el.scrollTo({top:0, behavior:'smooth'}); break; }
+        el = el.parentElement;
+      }
+    });
+  };
+  window.initbridgeBackToTop();
+</script>
