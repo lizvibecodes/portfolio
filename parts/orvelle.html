@@ -73,7 +73,7 @@
     font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; text-transform:uppercase;
   }
 
-  /* Logo section — its own block below the cover, full-width stacked logos */
+  /* Logo section - its own block below the cover, full-width stacked logos */
   .orvelle-page .logo-section{
     padding:clamp(40px,6vw,72px) 60px; background:var(--ink);
   }
@@ -95,7 +95,7 @@
     display:block; border:0; outline:0; user-select:none; -webkit-user-drag:none;
   }
 
-  /* Lightbox — pure CSS, opens via :target so it works with no JS */
+  /* Lightbox - pure CSS, opens via :target so it works with no JS */
   .orvelle-page .lightbox{
     position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center;
     padding:5vw;
@@ -125,14 +125,41 @@
   .orvelle-page .swatch .name{font-family:'Space Grotesk',sans-serif; color:var(--paper); font-size:14px;}
   .orvelle-page .swatch .hex{color:var(--paper); opacity:.5; font-size:12px; margin-top:3px;}
 
-  /* Back to homepage link */
-  .orvelle-page .back-home{
-    position:absolute; top:5%; left:5%; z-index:5; display:flex; align-items:center; gap:8px;
-    font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase;
-    color:var(--paper); opacity:.55; text-decoration:none; transition:opacity .15s ease;
-  }
-  .orvelle-page .back-home:hover{opacity:1;}
-  .orvelle-page .back-home svg{width:14px; height:14px; flex-shrink:0;}
+	/* Navigation container */
+	.orvelle-page .project-navigation {
+		position: absolute;
+		top: 5%;
+		right: 5%;
+		z-index: 5;
+		display: flex;
+		align-items: center;
+		gap: 28px;
+	}
+
+	/* Navigation links */
+	.orvelle-page .project-navigation a {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: 'Inter', sans-serif;
+		font-size: 12px;
+		letter-spacing: .2em;
+		text-transform: uppercase;
+		color: var(--paper);
+		opacity: .55;
+		text-decoration: none;
+		transition: opacity .15s ease;
+	}
+
+	.orvelle-page .project-navigation a:hover {
+		opacity: 1;
+	}
+
+	.orvelle-page .project-navigation svg {
+		width: 14px;
+		height: 14px;
+		flex-shrink: 0;
+	}
 
   /* Floating back-to-top button */
   .orvelle-page .back-to-top{
@@ -159,10 +186,30 @@
     <div id="orvelle-cover-bars"></div>
 
     <div class="brand">
-      <img class="brand-banner" src="images/orvelle_banner.png" alt="orvelle — interior design" />
+      <img class="brand-banner" src="images/orvelle_banner.png" alt="orvelle - interior design" />
     </div>
 
-    <div class="corner-r">No. 002</div>
+	<div class="project-navigation">
+		<!-- Back -->
+		<a href="project_ploog.html" aria-label="Previous homepage">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<line x1="19" y1="12" x2="5" y2="12"></line>
+				<polyline points="12 19 5 12 12 5"></polyline>
+			</svg>
+			Back
+		</a>
+
+		<!-- Next -->
+		<a href="project_roots.html" aria-label="Next project">
+			Next
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<line x1="5" y1="12" x2="19" y2="12"></line>
+				<polyline points="12 5 19 12 12 19"></polyline>
+			</svg>
+		</a>
+	</div>
 
   </div>
   

@@ -73,7 +73,7 @@
     font-size:clamp(40px,7vw,92px); letter-spacing:0.14em; text-transform:uppercase;
   }
 
-  /* Logo section — its own block below the cover, full-width stacked logos */
+  /* Logo section - its own block below the cover, full-width stacked logos */
   .ploog-page .logo-section{
     padding:clamp(40px,6vw,72px) 60px; background:var(--ink);
   }
@@ -95,7 +95,7 @@
     display:block; border:0; outline:0; user-select:none; -webkit-user-drag:none;
   }
 
-  /* Lightbox — pure CSS, opens via :target so it works with no JS */
+  /* Lightbox - pure CSS, opens via :target so it works with no JS */
   .ploog-page .lightbox{
     position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center;
     padding:5vw;
@@ -125,14 +125,41 @@
   .ploog-page .swatch .name{font-family:'Space Grotesk',sans-serif; color:var(--paper); font-size:14px;}
   .ploog-page .swatch .hex{color:var(--paper); opacity:.5; font-size:12px; margin-top:3px;}
 
-  /* Back to homepage link */
-  .ploog-page .back-home{
-    position:absolute; top:5%; left:5%; z-index:5; display:flex; align-items:center; gap:8px;
-    font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase;
-    color:var(--paper); opacity:.55; text-decoration:none; transition:opacity .15s ease;
-  }
-  .ploog-page .back-home:hover{opacity:1;}
-  .ploog-page .back-home svg{width:14px; height:14px; flex-shrink:0;}
+	/* Navigation container */
+	.ploog-page .project-navigation {
+		position: absolute;
+		top: 5%;
+		right: 5%;
+		z-index: 5;
+		display: flex;
+		align-items: center;
+		gap: 28px;
+	}
+
+	/* Navigation links */
+	.ploog-page .project-navigation a {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: 'Inter', sans-serif;
+		font-size: 12px;
+		letter-spacing: .2em;
+		text-transform: uppercase;
+		color: var(--paper);
+		opacity: .55;
+		text-decoration: none;
+		transition: opacity .15s ease;
+	}
+
+	.ploog-page .project-navigation a:hover {
+		opacity: 1;
+	}
+
+	.ploog-page .project-navigation svg {
+		width: 14px;
+		height: 14px;
+		flex-shrink: 0;
+	}
 
   /* Floating back-to-top button */
   .ploog-page .back-to-top{
@@ -159,10 +186,30 @@
     <div id="ploog-cover-bars"></div>
 
     <div class="brand">
-      <img class="brand-banner" src="images/ploog_banner.png" alt="Ploog — Unlock Collective Intelligence" />
+      <img class="brand-banner" src="images/ploog_banner.png" alt="Ploog - Unlock Collective Intelligence" />
     </div>
 
-    <div class="corner-r">No. 001</div>
+	<div class="project-navigation">
+		<!-- Back -->
+		<a href="index.html" aria-label="Back to homepage">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<line x1="19" y1="12" x2="5" y2="12"></line>
+				<polyline points="12 19 5 12 12 5"></polyline>
+			</svg>
+			Back
+		</a>
+
+		<!-- Next -->
+		<a href="project_orvelle.html" aria-label="Next project">
+			Next
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<line x1="5" y1="12" x2="19" y2="12"></line>
+				<polyline points="12 5 19 12 12 19"></polyline>
+			</svg>
+		</a>
+	</div>
 
   </div>
   
@@ -182,10 +229,10 @@
 
     <h2>Color palette</h2>
     <div class="palette">
-      <div class="swatch"><div class="chip" style="background:#6449b1;"></div><div class="name">Rebecca Purple</div><div class="hex">#6449b1 — the individual</div></div>
-      <div class="swatch"><div class="chip" style="background:#f34b3d;"></div><div class="name">Cinnabar</div><div class="hex">#f34b3d — the network, node</div></div>
-      <div class="swatch"><div class="chip" style="background:#FF7A45;"></div><div class="name">Ember Orange</div><div class="hex">#FF7A45 — the network, edge</div></div>
-      <div class="swatch"><div class="chip" style="background:#F3F1EC;"></div><div class="name">Paper</div><div class="hex">#F3F1EC — primary text</div></div>
+      <div class="swatch"><div class="chip" style="background:#6449b1;"></div><div class="name">Rebecca Purple</div><div class="hex">#6449b1 - the individual</div></div>
+      <div class="swatch"><div class="chip" style="background:#f34b3d;"></div><div class="name">Cinnabar</div><div class="hex">#f34b3d - the network, node</div></div>
+      <div class="swatch"><div class="chip" style="background:#FF7A45;"></div><div class="name">Ember Orange</div><div class="hex">#FF7A45 - the network, edge</div></div>
+      <div class="swatch"><div class="chip" style="background:#F3F1EC;"></div><div class="name">Paper</div><div class="hex">#F3F1EC - primary text</div></div>
       <div class="swatch"><div class="chip" style="background:#B1C6BD;"></div><div class="name">Ash Grey</div><div class="hex">#B1C6BD</div></div>
     </div>
   </div>  
