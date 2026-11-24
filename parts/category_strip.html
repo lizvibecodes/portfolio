@@ -1,9 +1,181 @@
-  <!-- Category strip -->
-  <div style="display:flex; flex-wrap: wrap;">
-    <div style="flex:1 1 190px; background:#E9EFDD; color:#3C6B2A; padding:20px 24px;" class="eyebrow">Brand identity</div>
-    <div style="flex:1 1 190px; background:#F0C23E; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Art direction</div>
-    <div style="flex:1 1 190px; background:#E08AA0; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Social media</div>
-    <div style="flex:1 1 190px; background:#1982c4; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Packaging</div>
-    <div style="flex:1 1 190px; background:#2E8F47; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Print</div>
-    <div style="flex:1 1 190px; background:#6B5E9E; color:#FBF7EC; padding:20px 24px;" class="eyebrow">Digital</div>
+<!-- Category strip marquee -->
+<style>
+  .category-marquee {
+    width: 100%;
+    overflow: hidden !important;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+    background: #16150F;
+    box-sizing: border-box;
+  }
+
+  .category-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: categoryMarquee 60s linear infinite;
+  }
+
+  .category-marquee:hover .category-marquee-track,
+  .category-marquee:focus-within .category-marquee-track,
+  .category-marquee:active .category-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .category-marquee-group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: stretch;
+  }
+
+  .category-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 32px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 175px;
+    line-height: 1.2;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+    cursor: default;
+  }
+
+  @media (hover: hover) {
+    .category-marquee-item:hover {
+      filter: brightness(1.06);
+    }
+  }
+
+  /* Specific category block colors from original design */
+  .category-marquee-item.cat-brand {
+    background: #E9EFDD;
+    color: #3C6B2A;
+  }
+  .category-marquee-item.cat-art {
+    background: #F0C23E;
+    color: #FBF7EC;
+    text-shadow: 0 1px 2px rgba(22, 21, 15, 0.14);
+  }
+  .category-marquee-item.cat-social {
+    background: #E08AA0;
+    color: #FBF7EC;
+    text-shadow: 0 1px 2px rgba(22, 21, 15, 0.12);
+  }
+  .category-marquee-item.cat-packaging {
+    background: #1982c4;
+    color: #FBF7EC;
+  }
+  .category-marquee-item.cat-print {
+    background: #2E8F47;
+    color: #FBF7EC;
+  }
+  .category-marquee-item.cat-digital {
+    background: #6B5E9E;
+    color: #FBF7EC;
+  }
+
+  @keyframes categoryMarquee {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 700px) {
+    .category-marquee-item {
+      padding: 15px 22px !important;
+      font-size: 11px !important;
+      letter-spacing: 0.12em !important;
+      min-width: 135px !important;
+    }
+    .category-marquee-track {
+      animation-duration: 45s;
+    }
+  }
+
+  /* Accessibility: motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .category-marquee {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+    }
+    .category-marquee-track {
+      animation: none !important;
+    }
+  }
+</style>
+
+<div class="category-marquee" role="region" aria-label="Design categories marquee">
+  <div class="category-marquee-track">
+    <!-- Group 1: Primary set (repeated 4 times for seamless ultra-wide coverage) -->
+    <div class="category-marquee-group">
+      <!-- Cycle 1 -->
+      <div class="category-marquee-item cat-brand eyebrow">Brand identity</div>
+      <div class="category-marquee-item cat-art eyebrow">Art direction</div>
+      <div class="category-marquee-item cat-social eyebrow">Social media</div>
+      <div class="category-marquee-item cat-packaging eyebrow">Packaging</div>
+      <div class="category-marquee-item cat-print eyebrow">Print</div>
+      <div class="category-marquee-item cat-digital eyebrow">Digital</div>
+      <!-- Cycle 2 -->
+      <div class="category-marquee-item cat-brand eyebrow">Brand identity</div>
+      <div class="category-marquee-item cat-art eyebrow">Art direction</div>
+      <div class="category-marquee-item cat-social eyebrow">Social media</div>
+      <div class="category-marquee-item cat-packaging eyebrow">Packaging</div>
+      <div class="category-marquee-item cat-print eyebrow">Print</div>
+      <div class="category-marquee-item cat-digital eyebrow">Digital</div>
+      <!-- Cycle 3 -->
+      <div class="category-marquee-item cat-brand eyebrow">Brand identity</div>
+      <div class="category-marquee-item cat-art eyebrow">Art direction</div>
+      <div class="category-marquee-item cat-social eyebrow">Social media</div>
+      <div class="category-marquee-item cat-packaging eyebrow">Packaging</div>
+      <div class="category-marquee-item cat-print eyebrow">Print</div>
+      <div class="category-marquee-item cat-digital eyebrow">Digital</div>
+      <!-- Cycle 4 -->
+      <div class="category-marquee-item cat-brand eyebrow">Brand identity</div>
+      <div class="category-marquee-item cat-art eyebrow">Art direction</div>
+      <div class="category-marquee-item cat-social eyebrow">Social media</div>
+      <div class="category-marquee-item cat-packaging eyebrow">Packaging</div>
+      <div class="category-marquee-item cat-print eyebrow">Print</div>
+      <div class="category-marquee-item cat-digital eyebrow">Digital</div>
+    </div>
+
+    <!-- Group 2: Duplicate set for continuous looping (hidden from assistive technologies) -->
+    <div class="category-marquee-group" aria-hidden="true">
+      <!-- Cycle 1 -->
+      <div class="category-marquee-item cat-brand eyebrow">Brand identity</div>
+      <div class="category-marquee-item cat-art eyebrow">Art direction</div>
+      <div class="category-marquee-item cat-social eyebrow">Social media</div>
+      <div class="category-marquee-item cat-packaging eyebrow">Packaging</div>
+      <div class="category-marquee-item cat-print eyebrow">Print</div>
+      <div class="category-marquee-item cat-digital eyebrow">Digital</div>
+      <!-- Cycle 2 -->
+      <div class="category-marquee-item cat-brand eyebrow">Brand identity</div>
+      <div class="category-marquee-item cat-art eyebrow">Art direction</div>
+      <div class="category-marquee-item cat-social eyebrow">Social media</div>
+      <div class="category-marquee-item cat-packaging eyebrow">Packaging</div>
+      <div class="category-marquee-item cat-print eyebrow">Print</div>
+      <div class="category-marquee-item cat-digital eyebrow">Digital</div>
+      <!-- Cycle 3 -->
+      <div class="category-marquee-item cat-brand eyebrow">Brand identity</div>
+      <div class="category-marquee-item cat-art eyebrow">Art direction</div>
+      <div class="category-marquee-item cat-social eyebrow">Social media</div>
+      <div class="category-marquee-item cat-packaging eyebrow">Packaging</div>
+      <div class="category-marquee-item cat-print eyebrow">Print</div>
+      <div class="category-marquee-item cat-digital eyebrow">Digital</div>
+      <!-- Cycle 4 -->
+      <div class="category-marquee-item cat-brand eyebrow">Brand identity</div>
+      <div class="category-marquee-item cat-art eyebrow">Art direction</div>
+      <div class="category-marquee-item cat-social eyebrow">Social media</div>
+      <div class="category-marquee-item cat-packaging eyebrow">Packaging</div>
+      <div class="category-marquee-item cat-print eyebrow">Print</div>
+      <div class="category-marquee-item cat-digital eyebrow">Digital</div>
+    </div>
   </div>
+</div>
